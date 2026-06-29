@@ -166,6 +166,8 @@
 function switchCategory(idx){
   document.querySelectorAll('.menu-sb-i').forEach((s,i)=>s.classList.toggle('active',i===idx));
   renderDishes(idx);
+  const ct=document.getElementById('menuContent');
+  if(ct)ct.scrollTop=0;
 }
 
 function renderDishes(catIdx){
@@ -193,7 +195,7 @@ function renderDishes(catIdx){
       <div style="padding:6px 16px;background:#fff;color:var(--color-coral-flame);font-size:13px;font-weight:600;border-radius:20px;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.06)">${p.btn}</div>
     </div>
   `;
-  c.innerHTML=promoHtml+filtered.map(d=>{
+  const dishHtml=filtered.map(d=>{
     const extra=getDishExtra(d.id);
     const qty=getCartQty(d.id);
     const qtyHtml=qty>0
@@ -219,6 +221,8 @@ function renderDishes(catIdx){
       </div>
     </div>
   `}).join('');
+  const emptyHtml=filtered.length===0?`<div style="text-align:center;padding:60px 20px;color:#ccc"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" style="margin:0 auto 12px;display:block"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><div style="font-size:14px;margin-bottom:8px">该分类暂无商品</div><div style="font-size:12px">去看看其他分类吧～</div></div>`:'';
+  c.innerHTML=promoHtml+dishHtml+emptyHtml;
 }
 renderDishes(0);
 
@@ -241,6 +245,7 @@ function openDish(id){
   bs.classList.remove('scrolled');
   bs.classList.add('active');
   document.getElementById('dishOv').classList.add('active');
+  document.body.style.overflow='hidden';
   scrollEl.onscroll=function(){
     if(scrollEl.scrollTop>180)bs.classList.add('scrolled');
     else bs.classList.remove('scrolled');
@@ -251,6 +256,7 @@ function closeDishModal(){
   bs.classList.remove('active','scrolled');
   document.getElementById('dishOv').classList.remove('active');
   document.getElementById('dishModalScroll').onscroll=null;
+  document.body.style.overflow='';
 }
 function changeModalQty(d){
   modalQty=Math.max(1,modalQty+d);

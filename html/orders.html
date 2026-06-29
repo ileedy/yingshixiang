@@ -50,7 +50,7 @@ function renderOrders(filter){
   const statusMap={
     pending:{text:'待支付',color:'var(--color-magenta-spark)',bg:'rgba(251,45,84,.08)'},
     preparing:{text:'待制作',color:'var(--color-coral-flame)',bg:'rgba(247,59,32,.08)'},
-    ready:{text:'待取餐',color:'var(--color-cobalt-pulse)',bg:'rgba(71,126,233,.08)'},
+    ready:{text:'待取餐/配送',color:'var(--color-cobalt-pulse)',bg:'rgba(71,126,233,.08)'},
     done:{text:'已完成',color:'var(--color-mint-action)',bg:'rgba(52,199,113,.08)'}
   };
   list.innerHTML=filtered.map(o=>{

@@ -131,12 +131,14 @@ function openCart(){
   if(cart.length===0){showToast('购物车为空');return;}
   document.getElementById('cartOverlay').classList.add('active');
   document.getElementById('cartSidebar').classList.add('active');
+  document.body.style.overflow='hidden';
   if(typeof renderCartSidebar==='function') renderCartSidebar();
 }
 
 function closeCart(){
   document.getElementById('cartOverlay').classList.remove('active');
   document.getElementById('cartSidebar').classList.remove('active');
+  document.body.style.overflow='';
 }
 
 function renderCartSidebar(){
@@ -215,3 +217,6 @@ function sendCode(){
 
 function doLogin(){showToast('登录成功');navigateTo('page-profile');}
 function reorder(){showToast('已加入购物车');navigateTo('page-menu');}
+
+// Auto scroll to top on page load
+window.addEventListener('DOMContentLoaded',()=>{window.scrollTo(0,0);});
