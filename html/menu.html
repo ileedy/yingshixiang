@@ -64,7 +64,6 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </div>
     </div>
-    <div class="dish-bs-handle"></div>
     <div class="dish-bs-info">
       <div id="dishModalName" class="dish-bs-name"></div>
       <div id="dishModalDesc" class="dish-bs-desc"></div>
@@ -197,13 +196,12 @@ function renderDishes(catIdx){
   c.innerHTML=promoHtml+filtered.map(d=>{
     const extra=getDishExtra(d.id);
     const qty=getCartQty(d.id);
-    const tagHtml=extra.tag?`<div class="dc-tag" style="background:${extra.tagColor}">${extra.tag}</div>`:'';
     const qtyHtml=qty>0
       ?`<div class="dc-qty"><button class="dc-qty-b" onclick="event.stopPropagation();updateDishQty(${d.id},-1)">-</button><span class="dc-qty-n">${qty}</span><button class="dc-qty-b" onclick="event.stopPropagation();updateDishQty(${d.id},1)">+</button></div>`
       :`<button class="dc-add" onclick="event.stopPropagation();openDish(${d.id})">+</button>`;
     return`
     <div class="dc">
-      <div class="dc-img" onclick="openDish(${d.id})">${tagHtml}<img src="${d.img}" style="width:100%;height:100%;object-fit:cover;border-radius:14px" alt="${d.name}"></div>
+      <div class="dc-img" onclick="openDish(${d.id})"><img src="${d.img}" style="width:100%;height:100%;object-fit:cover;border-radius:14px" alt="${d.name}"></div>
       <div class="dc-info">
         <div>
           <div class="dc-nm">${d.name}</div>
