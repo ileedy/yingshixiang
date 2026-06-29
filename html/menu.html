@@ -179,7 +179,7 @@ function renderDishes(catIdx){
     const qty=getCartQty(d.id);
     const qtyHtml=qty>0
       ?`<div class="dc-qty"><button class="dc-qty-b" onclick="event.stopPropagation();updateDishQty(${d.id},-1)">-</button><span class="dc-qty-n">${qty}</span><button class="dc-qty-b" onclick="event.stopPropagation();updateDishQty(${d.id},1)">+</button></div>`
-      :`<button class="dc-add" onclick="event.stopPropagation();openDish(${d.id})">+</button>`;
+      :`<button class="dc-add" onclick="event.stopPropagation();addToCart(${d.id})">+</button>`;
     return`
     <div class="dc" style="animation:fadeSlideUp .35s ease both;animation-delay:${i*0.06}s">
       <div class="dc-img" onclick="openDish(${d.id})"><img src="${d.img}" style="width:100%;height:100%;object-fit:cover;border-radius:14px" alt="${d.name}"></div>

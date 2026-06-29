@@ -113,6 +113,8 @@ function addToCart(id){
   const existing=cart.find(c=>c.id===id);
   if(existing)existing.qty++;else cart.push({id:d.id,name:d.name,price:d.price,qty:1,img:d.img});
   updateCart();showToast('已加入购物车');
+  const activeIdx=Array.from(document.querySelectorAll('.menu-sb-i')).findIndex(s=>s.classList.contains('active'));
+  if(activeIdx>=0 && typeof renderDishes==='function') renderDishes(activeIdx);
 }
 
 function updateCart(){
@@ -217,6 +219,10 @@ function sendCode(){
 
 function doLogin(){showToast('登录成功');navigateTo('page-profile');}
 function reorder(){showToast('已加入购物车');navigateTo('page-menu');}
+function goToCheckout(){
+  if(cart.length===0){showToast('购物车为空');return;}
+  navigateTo('page-confirm');
+}
 
 // Auto scroll to top on page load
 window.addEventListener('DOMContentLoaded',()=>{window.scrollTo(0,0);});
