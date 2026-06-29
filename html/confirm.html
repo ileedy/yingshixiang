@@ -3,250 +3,386 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>硬是香面馆</title>
+<title>确认订单 - 硬是香面馆</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/common.css?v=2">
+<style>
+.type-i{padding:10px 20px;border-radius:20px;font-size:14px;font-weight:600;cursor:pointer;transition:all .25s cubic-bezier(.4,0,.2,1);white-space:nowrap;border:2px solid transparent}
+.type-i.active{color:#fff;background:var(--color-coral-flame);border-color:var(--color-coral-flame);box-shadow:0 4px 12px rgba(247,59,32,.25);transform:scale(1.05)}
+.type-i:not(.active){color:#999;background:#fff;border-color:#eee}
+.type-i:not(.active):active{transform:scale(.95)}
+.tn{padding:10px 0;border-radius:14px;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s ease;text-align:center;background:#fff;border:2px solid #eee;color:#666}
+.tn.active{background:var(--color-coral-flame);color:#fff;border-color:var(--color-coral-flame);box-shadow:0 4px 12px rgba(247,59,32,.2);transform:scale(1.08)}
+.tn:active{transform:scale(.95)}
+.tn:disabled{opacity:.4;cursor:not-allowed}
+
+.confirm-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid rgba(0,0,0,.04);align-items:center}
+.confirm-item:last-child{border-bottom:none;padding-bottom:0}
+.confirm-item img{width:64px;height:64px;border-radius:12px;object-fit:cover;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.confirm-item-info{flex:1;min-width:0}
+.confirm-item-name{font-size:15px;font-weight:600;color:var(--color-brandwood);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.confirm-item-qty{font-size:12px;color:#bbb;margin-top:4px}
+.confirm-item-price{font-size:16px;color:var(--color-coral-flame);font-weight:700;white-space:nowrap}
+
+.price-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0}
+.price-row .label{font-size:14px;color:#999}
+.price-row .value{font-size:15px;font-weight:600;color:var(--color-brandwood)}
+.price-row .value.discount{color:var(--color-mint-action)}
+.price-row .value.total{font-size:22px;font-weight:800;color:var(--color-coral-flame)}
+
+.submit-btn{background:linear-gradient(135deg,#f73b20,#ff6b35);color:#fff;border:none;border-radius:28px;padding:16px 0;font-size:17px;font-weight:700;cursor:pointer;width:100%;letter-spacing:1px;box-shadow:0 8px 24px rgba(247,59,32,.3);transition:all .2s ease}
+.submit-btn:active{transform:scale(.97);box-shadow:0 4px 12px rgba(247,59,32,.2)}
+.submit-btn:disabled{background:#ddd;box-shadow:none;cursor:not-allowed;transform:none}
+
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(0,0,0,.04);cursor:pointer;transition:background .2s}
+.info-row:last-child{border-bottom:none}
+.info-row:active{background:rgba(0,0,0,.02)}
+.info-row-left{display:flex;align-items:center;gap:10px}
+.info-row-icon{width:32px;height:32px;border-radius:10px;background:var(--color-sunset-fade);display:flex;align-items:center;justify-content:center}
+.info-row-label{font-size:14px;font-weight:600;color:var(--color-brandwood)}
+.info-row-value{font-size:14px;color:#999;display:flex;align-items:center;gap:4px}
+.info-row-value.active{color:var(--color-coral-flame);font-weight:600}
+
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.anim-up{animation:fadeSlideUp .4s ease both}
+.anim-up-1{animation-delay:.08s}
+.anim-up-2{animation-delay:.16s}
+.anim-up-3{animation-delay:.24s}
+.anim-up-4{animation-delay:.32s}
+</style>
 </head>
 <body>
 <div class="app" id="app">
 <div class="page active" id="page-confirm">
+
 <!-- Top Bar -->
-<div style="position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);padding:12px 16px;display:flex;align-items:center;gap:12px">
-  <div style="width:36px;height:36px;border-radius:50%;background:var(--color-sunset-fade);display:flex;align-items:center;justify-content:center;cursor:pointer" onclick="navigateTo('page-menu')">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-  </div>
-  <span style="flex:1;font-size:17px;font-weight:700;letter-spacing:.5px">确认订单</span>
+<div class="topbar" style="background:var(--color-bg)">
+  <div class="topbar-back" onclick="navigateTo('page-menu')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div>
+  <span class="topbar-t">确认订单</span>
+  <div style="width:32px"></div>
 </div>
-<!-- Order Type Tabs -->
-<div style="margin:8px 16px 0;display:flex;gap:8px" id="orderTypeTabs">
-  <div class="tab-p active" data-type="dine-in" onclick="switchOrderType(this,'dine-in')" style="flex:1;text-align:center;padding:12px;border-radius:16px;font-size:15px;font-weight:600;color:var(--color-coral-flame);background:linear-gradient(135deg,#fff5f0,#ffe0d3);border:1.5px solid rgba(247,59,32,.15)">堂食</div>
-  <div class="tab-p" data-type="pickup" onclick="switchOrderType(this,'pickup')" style="flex:1;text-align:center;padding:12px;border-radius:16px;font-size:15px;font-weight:500;color:#666;background:#f5f5f5;border:1.5px solid transparent">自取</div>
-  <div class="tab-p" data-type="delivery" onclick="switchOrderType(this,'delivery')" style="flex:1;text-align:center;padding:12px;border-radius:16px;font-size:15px;font-weight:500;color:#666;background:#f5f5f5;border:1.5px solid transparent">外卖</div>
-</div>
-<!-- Table Number (Dine-in) -->
-<div id="tableNumberSection" style="margin:12px 16px 0;padding:16px;background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04)">
-  <div style="font-size:14px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:6px">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-    选择桌号
-  </div>
-  <div style="display:flex;flex-wrap:wrap;gap:8px" id="tableNumberGrid">
-    <div class="table-num active" onclick="selectTable(this)" style="min-width:52px;text-align:center;padding:10px 12px;border-radius:12px;font-size:14px;font-weight:600;background:var(--color-sunset-fade);color:var(--color-coral-flame);border:1.5px solid rgba(247,59,32,.2);cursor:pointer">A1</div>
-    <div class="table-num" onclick="selectTable(this)" style="min-width:52px;text-align:center;padding:10px 12px;border-radius:12px;font-size:14px;font-weight:500;background:#f5f5f5;color:#666;border:1.5px solid transparent;cursor:pointer">A2</div>
-    <div class="table-num" onclick="selectTable(this)" style="min-width:52px;text-align:center;padding:10px 12px;border-radius:12px;font-size:14px;font-weight:500;background:#f5f5f5;color:#666;border:1.5px solid transparent;cursor:pointer">A3</div>
-    <div class="table-num" onclick="selectTable(this)" style="min-width:52px;text-align:center;padding:10px 12px;border-radius:12px;font-size:14px;font-weight:500;background:#f5f5f5;color:#666;border:1.5px solid transparent;cursor:pointer">B1</div>
-    <div class="table-num" onclick="selectTable(this)" style="min-width:52px;text-align:center;padding:10px 12px;border-radius:12px;font-size:14px;font-weight:500;background:#f5f5f5;color:#666;border:1.5px solid transparent;cursor:pointer">B2</div>
-    <div class="table-num" onclick="selectTable(this)" style="min-width:52px;text-align:center;padding:10px 12px;border-radius:12px;font-size:14px;font-weight:500;background:#f5f5f5;color:#666;border:1.5px solid transparent;cursor:pointer">B3</div>
-    <div class="table-num" onclick="selectTable(this)" style="min-width:52px;text-align:center;padding:10px 12px;border-radius:12px;font-size:14px;font-weight:500;background:#f5f5f5;color:#666;border:1.5px solid transparent;cursor:pointer">C1</div>
-    <div class="table-num" onclick="selectTable(this)" style="min-width:52px;text-align:center;padding:10px 12px;border-radius:12px;font-size:14px;font-weight:500;background:#f5f5f5;color:#666;border:1.5px solid transparent;cursor:pointer">C2</div>
-  </div>
-</div>
-<!-- Pickup Time -->
-<div id="pickupTimeSection" style="display:none;margin:12px 16px 0;padding:16px;background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04)">
-  <div style="font-size:14px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:6px">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-    取餐时间
-  </div>
-  <div style="display:flex;gap:8px">
-    <div class="radio-i sel" style="flex:1;justify-content:center;border-radius:12px;background:var(--color-sunset-fade)" onclick="selectRadio(this)"><div class="radio-c"><div class="radio-ci"></div></div><span style="font-size:14px">尽快</span></div>
-    <div class="radio-i" style="flex:1;justify-content:center;border-radius:12px" onclick="selectRadio(this)"><div class="radio-c"><div class="radio-ci"></div></div><span style="font-size:14px">30分钟后</span></div>
-    <div class="radio-i" style="flex:1;justify-content:center;border-radius:12px" onclick="selectRadio(this)"><div class="radio-c"><div class="radio-ci"></div></div><span style="font-size:14px">1小时后</span></div>
-  </div>
-</div>
-<!-- Delivery Address -->
-<div id="deliveryAddrSection" style="display:none;margin:12px 16px 0">
-  <div style="background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);cursor:pointer;padding:16px" onclick="navigateTo('page-address')">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <div style="display:flex;gap:12px;align-items:flex-start">
-        <div style="width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#e3f2fd,#bbdefb);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1976d2" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <div>
-          <div style="font-size:15px;font-weight:600">张三 138****8888</div>
-          <div style="font-size:13px;color:#666;margin-top:4px">成都市锦江区万象城B1层</div>
-        </div>
+
+<!-- Order Type -->
+<div class="anim-up" style="padding:12px 16px 0">
+  <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
+    <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-bottom:12px">用餐方式</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <div class="type-i active" data-type="dine-in" onclick="selectOrderType('dine-in',this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:-3px;margin-right:4px"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>堂食
       </div>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-    </div>
-  </div>
-</div>
-<!-- Order Items -->
-<div style="margin:12px 16px 0;background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);padding:16px">
-  <div style="font-size:14px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:6px">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-    订单明细
-  </div>
-  <div id="confirmOrderItems">
-    <div style="text-align:center;padding:32px 0;color:#ccc">
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" style="margin:0 auto 8px;display:block"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-      <div style="font-size:13px">请先选择商品</div>
-    </div>
-  </div>
-</div>
-<!-- Price Breakdown -->
-<div style="margin:8px 16px 0;background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);padding:16px">
-  <div style="background:var(--color-sunset-fade);border-radius:12px;padding:16px">
-    <div style="display:flex;justify-content:space-between;margin-bottom:10px"><span style="font-size:14px;color:#666">商品小计</span><span style="font-size:14px;font-weight:500" id="confirmSubtotal">¥0</span></div>
-    <div id="confirmPackRow" style="display:none;justify-content:space-between;margin-bottom:10px"><span style="font-size:14px;color:#666">包装费</span><span style="font-size:14px;font-weight:500">¥2.00</span></div>
-    <div id="confirmDelRow" style="display:none;justify-content:space-between;margin-bottom:10px"><span style="font-size:14px;color:#666">配送费</span><span style="font-size:14px;font-weight:500">¥5.00</span></div>
-    <div id="confirmDiscRow" style="display:none;justify-content:space-between;margin-bottom:10px"><span style="font-size:14px;color:#666">优惠</span><span style="font-size:14px;color:var(--color-coral-flame);font-weight:500" id="confirmDisc">-¥0</span></div>
-    <div style="display:flex;justify-content:space-between;border-top:1px solid rgba(0,0,0,.06);padding-top:12px;margin-top:4px"><span style="font-size:15px;font-weight:600">合计</span><span style="font-size:20px;font-weight:700;color:var(--color-coral-flame)" id="confirmTotal">¥0</span></div>
-  </div>
-</div>
-<!-- Coupon -->
-<div style="margin:8px 16px 0;background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);padding:14px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer" onclick="openCouponSheet()">
-  <div style="display:flex;align-items:center;gap:8px">
-    <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#ffe0d3,#ffb89e);display:flex;align-items:center;justify-content:center">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><path d="M20 12V8H6a2 2 0 01-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 00-4 0v4h4v-4z"/></svg>
-    </div>
-    <span style="font-size:14px;font-weight:500">优惠券</span>
-  </div>
-  <div style="display:flex;align-items:center;gap:4px"><span style="font-size:14px;color:var(--color-coral-flame);font-weight:500" id="selCouponText">选择优惠券</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
-</div>
-<!-- Tableware & Child Meal -->
-<div style="margin:8px 16px 0;background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);padding:14px 16px">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(0,0,0,.04)">
-    <div style="display:flex;align-items:center;gap:8px">
-      <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#fff3e0,#ffe0b2);display:flex;align-items:center;justify-content:center">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff9800" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 00-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>
+      <div class="type-i" data-type="pickup" onclick="selectOrderType('pickup',this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:-3px;margin-right:4px"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>自提
       </div>
-      <span style="font-size:14px;font-weight:500">餐具份数</span>
-    </div>
-    <div style="display:flex;align-items:center;gap:12px">
-      <div style="display:flex;align-items:center;gap:6px;cursor:pointer" onclick="changeTableware(-1)">
-        <div style="width:28px;height:28px;border-radius:50%;background:#f5f5f5;display:flex;align-items:center;justify-content:center">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </div>
-      </div>
-      <span style="font-size:15px;font-weight:600;min-width:18px;text-align:center" id="tablewareCount">1</span>
-      <div style="display:flex;align-items:center;gap:6px;cursor:pointer" onclick="changeTableware(1)">
-        <div style="width:28px;height:28px;border-radius:50%;background:var(--color-sunset-fade);display:flex;align-items:center;justify-content:center">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </div>
+      <div class="type-i" data-type="delivery" onclick="selectOrderType('delivery',this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:-3px;margin-right:4px"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 3 22 8 22 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>外卖
       </div>
     </div>
   </div>
-  <div class="ckb" onclick="toggleChildMeal()" style="padding:0;border:none;background:none;border-radius:0">
-    <div class="ckb-box" id="childMealBox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></div>
-    <div style="display:flex;align-items:center;gap:8px">
-      <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);display:flex;align-items:center;justify-content:center">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-      </div>
+</div>
+
+<!-- Table Number (Dine-in only) -->
+<div class="anim-up anim-up-1" id="tableSection" style="padding:12px 16px 0">
+  <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div style="font-size:14px;font-weight:700;color:var(--color-brandwood)">选择桌号</div>
+      <span style="font-size:12px;color:var(--color-coral-flame);font-weight:600;background:rgba(247,59,32,.08);padding:4px 10px;border-radius:10px">已选 <span id="selectedTableText">A1</span></span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+      <div class="tn active" data-tn="A1" onclick="selectTable('A1',this)">A1</div>
+      <div class="tn" data-tn="A2" onclick="selectTable('A2',this)">A2</div>
+      <div class="tn" data-tn="A3" onclick="selectTable('A3',this)">A3</div>
+      <div class="tn" data-tn="A4" onclick="selectTable('A4',this)">A4</div>
+      <div class="tn" data-tn="B1" onclick="selectTable('B1',this)">B1</div>
+      <div class="tn" data-tn="B2" onclick="selectTable('B2',this)">B2</div>
+      <div class="tn" data-tn="B3" onclick="selectTable('B3',this)">B3</div>
+      <div class="tn" data-tn="B4" onclick="selectTable('B4',this)">B4</div>
+      <div class="tn" data-tn="C1" onclick="selectTable('C1',this)">C1</div>
+      <div class="tn" data-tn="C2" onclick="selectTable('C2',this)">C2</div>
+      <div class="tn" data-tn="C3" onclick="selectTable('C3',this)">C3</div>
+      <div class="tn" data-tn="C4" onclick="selectTable('C4',this)">C4</div>
+    </div>
+  </div>
+</div>
+
+<!-- Pickup Info (Pickup only) -->
+<div class="anim-up anim-up-1" id="pickupSection" style="padding:12px 16px 0;display:none">
+  <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
+    <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-bottom:12px">取餐信息</div>
+    <div style="display:flex;gap:10px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px">
+      <div class="type-i active" style="padding:8px 16px;font-size:13px" onclick="this.parentElement.querySelectorAll('.type-i').forEach(t=>t.classList.remove('active'));this.classList.add('active')">10分钟后</div>
+      <div class="type-i" style="padding:8px 16px;font-size:13px" onclick="this.parentElement.querySelectorAll('.type-i').forEach(t=>t.classList.remove('active'));this.classList.add('active')">20分钟后</div>
+      <div class="type-i" style="padding:8px 16px;font-size:13px" onclick="this.parentElement.querySelectorAll('.type-i').forEach(t=>t.classList.remove('active'));this.classList.add('active')">30分钟后</div>
+      <div class="type-i" style="padding:8px 16px;font-size:13px" onclick="this.parentElement.querySelectorAll('.type-i').forEach(t=>t.classList.remove('active'));this.classList.add('active')">到店后制作</div>
+    </div>
+    <div style="padding:12px;background:var(--color-sunset-fade);border-radius:14px;display:flex;align-items:center;gap:10px">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
       <div>
-        <div style="font-size:14px;font-weight:600">儿童免费餐</div>
-        <div style="font-size:12px;color:#999">(已绑定5岁以下儿童)</div>
+        <div style="font-size:13px;font-weight:600;color:var(--color-brandwood)">硬是香面馆 · 万象城店</div>
+        <div style="font-size:12px;color:#999;margin-top:2px">成都市锦江区万象城B1层</div>
       </div>
     </div>
   </div>
 </div>
-<!-- Remark -->
-<div style="margin:8px 16px 0;background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);padding:16px">
-  <div style="font-size:14px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:6px">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-    备注
-  </div>
-  <textarea class="txa" placeholder="如：不要香菜、少油少盐..." rows="2" style="border-radius:12px;background:var(--color-sunset-fade);border:1.5px solid transparent;font-size:14px;padding:12px"></textarea>
-</div>
-<!-- Payment Method -->
-<div style="margin:8px 16px 0;background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);padding:16px">
-  <div style="font-size:14px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:6px">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-    支付方式
-  </div>
-  <div class="radio-i sel" onclick="selectRadio(this)" style="border-radius:12px;padding:14px;margin-bottom:8px;background:var(--color-sunset-fade)">
-    <div style="width:32px;height:32px;border-radius:8px;background:#07c160;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="12" r="10"/><path d="M8.5 11a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm7 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/></svg></div>
-    <span style="flex:1;font-size:14px;font-weight:500">微信支付</span><div class="radio-c"><div class="radio-ci"></div></div>
-  </div>
-  <div class="radio-i" onclick="selectRadio(this)" style="border-radius:12px;padding:14px">
-    <div style="width:32px;height:32px;border-radius:8px;background:var(--color-coral-flame);display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><rect x="2" y="6" width="20" height="14" rx="2"/><circle cx="12" cy="13" r="3"/></svg></div>
-    <span style="flex:1;font-size:14px;font-weight:500">余额支付 (¥86.50)</span><div class="radio-c"><div class="radio-ci"></div></div>
-  </div>
-</div>
-<!-- Bottom Submit -->
-<div style="position:sticky;bottom:0;left:0;right:0;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);padding:12px 16px 24px;box-shadow:0 -4px 20px rgba(0,0,0,.06)">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;padding:0 4px">
-    <div style="display:flex;align-items:baseline;gap:2px">
-      <span style="font-size:13px;color:#666">合计</span>
-      <span style="font-size:22px;font-weight:700;color:var(--color-coral-flame)" id="confirmTotalBottom">¥0</span>
+
+<!-- Delivery Info (Delivery only) -->
+<div class="anim-up anim-up-1" id="deliverySection" style="padding:12px 16px 0;display:none">
+  <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
+    <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-bottom:12px">配送信息</div>
+    <div class="info-row" onclick="showToast('选择收货地址')">
+      <div class="info-row-left">
+        <div class="info-row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div>
+          <div class="info-row-label">天府大道888号</div>
+          <div style="font-size:12px;color:#bbb;margin-top:2px">张先生 138****8888</div>
+        </div>
+      </div>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </div>
-    <span style="font-size:12px;color:#999" id="confirmItemCount">共0件</span>
+    <div style="display:flex;gap:10px;margin-top:8px;overflow-x:auto;padding-bottom:4px">
+      <div class="type-i active" style="padding:8px 16px;font-size:13px" onclick="this.parentElement.querySelectorAll('.type-i').forEach(t=>t.classList.remove('active'));this.classList.add('active')">尽快送达</div>
+      <div class="type-i" style="padding:8px 16px;font-size:13px" onclick="this.parentElement.querySelectorAll('.type-i').forEach(t=>t.classList.remove('active'));this.classList.add('active')">12:00</div>
+      <div class="type-i" style="padding:8px 16px;font-size:13px" onclick="this.parentElement.querySelectorAll('.type-i').forEach(t=>t.classList.remove('active'));this.classList.add('active')">12:30</div>
+    </div>
+    <div style="margin-top:10px;padding:10px 12px;background:rgba(251,45,84,.06);border-radius:12px;display:flex;align-items:center;gap:8px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-magenta-spark)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <span style="font-size:12px;color:var(--color-magenta-spark);font-weight:500">预计送达时间：30-40分钟</span>
+    </div>
   </div>
-  <button class="btn-f" style="width:100%;padding:14px;font-size:16px;border-radius:16px;letter-spacing:1px" id="submitOrderBtn" onclick="submitOrder()">提交订单</button>
 </div>
+
+<!-- Order Detail -->
+<div class="anim-up anim-up-2" style="padding:12px 16px 0">
+  <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
+    <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-bottom:4px">订单明细</div>
+    <div id="confirmOrderList"></div>
+  </div>
+</div>
+
+<!-- Price Detail -->
+<div class="anim-up anim-up-3" style="padding:12px 16px 0">
+  <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
+    <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-bottom:8px">费用明细</div>
+    <div class="price-row">
+      <span class="label">商品小计</span>
+      <span class="value" id="confirmSubtotal">¥0</span>
+    </div>
+    <div class="price-row" id="deliveryFeeRow" style="display:none">
+      <span class="label">配送费</span>
+      <span class="value" id="deliveryFee">¥5</span>
+    </div>
+    <div class="price-row" id="packFeeRow" style="display:none">
+      <span class="label">包装费</span>
+      <span class="value" id="packFee">¥2</span>
+    </div>
+    <div class="price-row">
+      <span class="label">优惠</span>
+      <span class="value discount" id="confirmDiscount">-¥0</span>
+    </div>
+    <div style="height:1px;background:rgba(0,0,0,.06);margin:8px 0"></div>
+    <div class="price-row" style="padding:6px 0">
+      <span class="label" style="font-size:14px;color:var(--color-brandwood);font-weight:600">合计</span>
+      <span class="value total" id="confirmTotal">¥0</span>
+    </div>
+  </div>
+</div>
+
+<!-- Coupon -->
+<div class="anim-up anim-up-3" style="padding:12px 16px 0">
+  <div style="background:#fff;border-radius:20px;padding:0 16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
+    <div class="info-row" onclick="openCouponSheet()">
+      <div class="info-row-left">
+        <div class="info-row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div>
+        <div class="info-row-label">优惠券</div>
+      </div>
+      <div class="info-row-value" id="selCouponText">选择优惠券</div>
+    </div>
+  </div>
+</div>
+
+<!-- Cutlery -->
+<div class="anim-up anim-up-3" style="padding:12px 16px 0">
+  <div style="background:#fff;border-radius:20px;padding:0 16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
+    <div class="info-row">
+      <div class="info-row-left">
+        <div class="info-row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2"/><path d="M7 2v20"/><path d="M21 2v10c0 1.1-.9 2-2 2h-4a2 2 0 01-2-2V2"/><path d="M15 2v20"/></svg></div>
+        <div class="info-row-label">餐具份数</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="qty-b" style="width:28px;height:28px" onclick="changeCutlery(-1)">-</button>
+        <span style="font-size:15px;font-weight:700;width:20px;text-align:center" id="cutleryCount">1</span>
+        <button class="qty-b" style="width:28px;height:28px" onclick="changeCutlery(1)">+</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Note -->
+<div class="anim-up anim-up-4" style="padding:12px 16px 0">
+  <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
+    <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-bottom:10px">备注</div>
+    <textarea class="txa" placeholder="如：不要香菜、少油少盐、多加辣..." rows="2" style="border-radius:12px;background:var(--color-sunset-fade);border:none;padding:12px;font-size:14px"></textarea>
+  </div>
+</div>
+
+<!-- Payment -->
+<div class="anim-up anim-up-4" style="padding:12px 16px 0">
+  <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
+    <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-bottom:12px">支付方式</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:4px 0">
+        <div class="radio-i sel" style="margin-bottom:0" onclick="selectRadio(this)"><div class="radio-c"><div class="radio-ci"></div></div></div>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#07C160" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span style="font-size:14px">微信支付</span>
+      </label>
+      <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:4px 0">
+        <div class="radio-i" style="margin-bottom:0" onclick="selectRadio(this)"><div class="radio-c"><div class="radio-ci"></div></div></div>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"/><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"/><line x1="14.83" y1="9.17" x2="18.36" y2="5.64"/><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"/></svg>
+        <span style="font-size:14px">余额支付 (¥86.50)</span>
+      </label>
+    </div>
+  </div>
+</div>
+
+<!-- Child Meal -->
+<div class="anim-up anim-up-4" style="padding:12px 16px 0">
+  <div style="background:linear-gradient(135deg,#fff5f0,#fff);border-radius:20px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04);border:1px solid rgba(247,59,32,.08)">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:36px;height:36px;border-radius:10px;background:var(--color-coral-flame);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--color-brandwood)">儿童免费餐</div>
+          <div style="font-size:12px;color:#bbb">(已绑定5岁以下儿童)</div>
+        </div>
+      </div>
+      <div class="ckb" style="padding:6px" onclick="this.querySelector('.ckb-box').classList.toggle('ck');this.querySelector('svg').style.display=this.querySelector('.ckb-box').classList.contains('ck')?'block':'none'">
+        <div class="ckb-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="height:140px"></div>
+
+</div>
+
+<!-- Coupon Sheet -->
+<div class="modal-ov" id="couponSheet" onclick="closeCouponSheet()">
+  <div class="modal-ct" style="padding:16px" onclick="event.stopPropagation()">
+    <div style="text-align:center;font-size:17px;font-weight:700;margin-bottom:16px">选择优惠券</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="padding:14px;border-radius:14px;border:2px solid var(--color-coral-flame);background:var(--color-sunset-fade);cursor:pointer" onclick="selectCoupon(5,'满30减5元券')">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-size:16px;font-weight:700;color:var(--color-coral-flame)">¥5</div><div style="font-size:12px;color:#999">满30减5元券</div></div>
+          <div style="width:20px;height:20px;border-radius:50%;border:2px solid var(--color-coral-flame);display:flex;align-items:center;justify-content:center"><div style="width:10px;height:10px;border-radius:50%;background:var(--color-coral-flame)"></div></div>
+        </div>
+      </div>
+      <div style="padding:14px;border-radius:14px;border:2px solid #eee;background:#fff;cursor:pointer" onclick="selectCoupon(10,'满50减10元券')">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-size:16px;font-weight:700;color:var(--color-coral-flame)">¥10</div><div style="font-size:12px;color:#999">满50减10元券</div></div>
+          <div style="width:20px;height:20px;border-radius:50%;border:2px solid #ddd"></div>
+        </div>
+      </div>
+      <div style="padding:14px;border-radius:14px;border:2px solid #eee;background:#fff;cursor:pointer" onclick="selectCoupon(0,'不使用优惠券')">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-size:16px;font-weight:700;color:#999">不使用</div></div>
+          <div style="width:20px;height:20px;border-radius:50%;border:2px solid #ddd"></div>
+        </div>
+      </div>
+    </div>
+    <button class="btn-f" style="width:100%;margin-top:16px;border-radius:24px;padding:14px 0;font-size:16px" onclick="closeCouponSheet()">关闭</button>
+  </div>
+</div>
+
+<!-- Bottom Submit -->
+<div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:150;background:#fff;padding:12px 16px 20px;box-shadow:0 -4px 20px rgba(0,0,0,.06)">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <div>
+      <span style="font-size:12px;color:#999">合计</span>
+      <span style="font-size:24px;font-weight:800;color:var(--color-coral-flame);margin-left:4px" id="bottomTotal">¥0</span>
+      <span style="font-size:12px;color:#bbb;margin-left:4px" id="bottomCount">共0件</span>
+    </div>
+  </div>
+  <button class="submit-btn" id="submitOrderBtn" onclick="submitOrder()">提交订单</button>
 </div>
 
 </div>
 <div id="toast" class="toast"></div>
+  <div class="bnav" id="bottomNav" style="display:none"></div>
 <script src="../js/common.js"></script>
 <script>
 
-let selectedTable='A1',tablewareCount=1;
+// Restore cart from localStorage on page load
+(function(){
+  try{
+    const raw=localStorage.getItem('cart');
+    if(raw){cart=JSON.parse(raw);}
+  }catch(e){}
+})();
 
-function switchOrderType(el,type){
-  document.querySelectorAll('#orderTypeTabs .tab-p').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
+let selectedTable='A1';
+let cutleryCount=1;
+
+function selectOrderType(type,el){
   currentOrderType=type;
-  switchOrderTypeUI(type);
-  updateConfirmPage();
-}
-
-function switchOrderTypeUI(type){
-  const pts=document.getElementById('pickupTimeSection');
-  const das=document.getElementById('deliveryAddrSection');
-  const tns=document.getElementById('tableNumberSection');
-  if(pts)pts.style.display=type==='pickup'?'block':'none';
-  if(das)das.style.display=type==='delivery'?'block':'none';
-  if(tns)tns.style.display=type==='dine-in'?'block':'none';
-}
-
-function selectTable(el){
-  document.querySelectorAll('#tableNumberGrid .table-num').forEach(t=>{
-    t.classList.remove('active');
-    t.style.background='#f5f5f5';t.style.color='#666';t.style.borderColor='transparent';t.style.fontWeight='500';
-  });
+  document.querySelectorAll('.type-i').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
-  el.style.background='var(--color-sunset-fade)';el.style.color='var(--color-coral-flame)';el.style.borderColor='rgba(247,59,32,.2)';el.style.fontWeight='600';
-  selectedTable=el.textContent;
-}
-
-function changeTableware(d){
-  tablewareCount=Math.max(0,Math.min(10,tablewareCount+d));
-  const el=document.getElementById('tablewareCount');
-  if(el)el.textContent=tablewareCount;
-}
-
-function goToCheckout(){
-  if(cart.length===0){showToast('请先选择商品');return;}
-  closeCart();
+  document.getElementById('tableSection').style.display=type==='dine-in'?'block':'none';
+  document.getElementById('pickupSection').style.display=type==='pickup'?'block':'none';
+  document.getElementById('deliverySection').style.display=type==='delivery'?'block':'none';
+  document.getElementById('deliveryFeeRow').style.display=type==='delivery'?'flex':'none';
+  document.getElementById('packFeeRow').style.display=type==='delivery'?'flex':'none';
   renderConfirmOrder();
-  navigateTo('page-confirm');
+}
+
+function selectTable(tn,el){
+  selectedTable=tn;
+  document.querySelectorAll('.tn').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  const st=document.getElementById('selectedTableText');
+  if(st)st.textContent=tn;
+}
+
+function changeCutlery(d){
+  cutleryCount=Math.max(1,cutleryCount+d);
+  const el=document.getElementById('cutleryCount');
+  if(el)el.textContent=cutleryCount;
 }
 
 function renderConfirmOrder(){
-  const el=document.getElementById('confirmOrderItems');
+  const el=document.getElementById('confirmOrderList');
   if(!el)return;
   if(cart.length===0){
-    el.innerHTML='<div style="text-align:center;padding:32px 0;color:#ccc"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" style="margin:0 auto 8px;display:block"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><div style="font-size:13px;margin-bottom:12px">请先选择商品</div><button class="btn-o btn-s" onclick="navigateTo(\'page-menu\')">去点餐</button></div>';
-  }else{
-    el.innerHTML=cart.map(c=>{
-      const img=dishImgMap[c.name]||'../image/dish-signature-beef.jpg';
-      const specs=c.specs&&c.specs.length?'<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px">'+c.specs.map(s=>'<span style="font-size:11px;color:var(--color-coral-flame);background:rgba(247,59,32,.06);padding:1px 6px;border-radius:4px">'+s+'</span>').join('')+'</div>':'';
-      return '<div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.04)"><img src="'+img+'" style="width:56px;height:56px;border-radius:10px;object-fit:cover;flex-shrink:0" alt="'+c.name+'"><div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div style="font-size:14px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+c.name+'</div><span style="font-size:14px;font-weight:600;flex-shrink:0;margin-left:8px">¥'+(c.price*c.qty)+'</span></div>'+specs+'<div style="font-size:12px;color:#999;margin-top:4px">¥'+c.price+' x '+c.qty+'</div></div></div>';
-    }).join('');
+    el.innerHTML='<div style="text-align:center;padding:40px 0;color:#ccc"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" style="margin:0 auto 12px;display:block"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><div style="font-size:14px;margin-bottom:8px">购物车为空</div><button class="btn-f" style="border-radius:24px;padding:10px 28px;font-size:14px;margin-top:8px" onclick="navigateTo(\'page-menu\')">去点餐</button></div>';
+    updatePrice(0,0);
+    return;
   }
+  el.innerHTML=cart.map((c,i)=>`
+    <div class="confirm-item" style="animation:fadeSlideUp .3s ease both;animation-delay:${i*0.06}s">
+      <img src="${c.img}" alt="${c.name}">
+      <div class="confirm-item-info">
+        <div class="confirm-item-name">${c.name}</div>
+        <div class="confirm-item-qty">x${c.qty}</div>
+      </div>
+      <div class="confirm-item-price">¥${(c.price*c.qty).toFixed(0)}</div>
+    </div>
+  `).join('');
   const subtotal=cart.reduce((s,c)=>s+c.price*c.qty,0);
-  const totalQty=cart.reduce((s,c)=>s+c.qty,0);
-  let disc=0;
-  if(selectedCoupon)disc=selectedCoupon.amount;
-  const packFee=cart.length>0?2:0;
   const deliveryFee=currentOrderType==='delivery'?5:0;
-  const total=Math.max(0,subtotal+packFee+deliveryFee-disc);
-  const cs=document.getElementById('confirmSubtotal');if(cs)cs.textContent='¥'+subtotal;
-  const cpr=document.getElementById('confirmPackRow');if(cpr)cpr.style.display=cart.length>0?'flex':'none';
-  const cdr=document.getElementById('confirmDelRow');if(cdr)cdr.style.display=currentOrderType==='delivery'?'flex':'none';
-  const cd=document.getElementById('confirmDiscRow');if(cd)cd.style.display=disc>0?'flex':'none';
-  const cdi=document.getElementById('confirmDisc');if(cdi)cdi.textContent='-¥'+disc;
+  const packFee=currentOrderType==='delivery'?2:0;
+  const discount=selectedCoupon?selectedCoupon.amount:0;
+  const total=subtotal+deliveryFee+packFee-discount;
+  const totalQty=cart.reduce((s,c)=>s+c.qty,0);
+  updatePrice(subtotal,total,discount,deliveryFee,packFee,totalQty);
+}
+
+function updatePrice(subtotal,total,discount,deliveryFee,packFee,totalQty){
+  const st=document.getElementById('confirmSubtotal');if(st)st.textContent='¥'+subtotal.toFixed(0);
+  const df=document.getElementById('deliveryFee');if(df)df.textContent='¥'+deliveryFee;
+  const pf=document.getElementById('packFee');if(pf)pf.textContent='¥'+packFee;
+  const dc=document.getElementById('confirmDiscount');if(dc)dc.textContent='-¥'+discount;
   const ct=document.getElementById('confirmTotal');if(ct)ct.textContent='¥'+total.toFixed(0);
-  const ctb=document.getElementById('confirmTotalBottom');if(ctb)ctb.textContent='¥'+total.toFixed(0);
+  const bt=document.getElementById('bottomTotal');if(bt)bt.textContent='¥'+total.toFixed(0);
+  const bc=document.getElementById('bottomCount');if(bc)bc.textContent='共'+totalQty+'件';
   const cic=document.getElementById('confirmItemCount');if(cic)cic.textContent='共'+totalQty+'件';
   const sob=document.getElementById('submitOrderBtn');if(sob)sob.textContent='提交订单 ¥'+total.toFixed(0);
 }
@@ -255,19 +391,25 @@ function updateConfirmPage(){renderConfirmOrder();}
 
 function submitOrder(){
   if(cart.length===0){showToast('购物车为空');return;}
+  saveCart();
   navigateTo('page-success');
   const sp=document.getElementById('successPickup');if(sp)sp.style.display=(currentOrderType==='dine-in'||currentOrderType==='pickup')?'block':'none';
   const sd=document.getElementById('successDelivery');if(sd)sd.style.display=currentOrderType==='delivery'?'block':'none';
-  cart=[];updateCart();selectedCoupon=null;
+  cart=[];saveCart();updateCart();selectedCoupon=null;
 }
 
 function openCouponSheet(){document.getElementById('couponSheet').classList.add('active');}
 function closeCouponSheet(){document.getElementById('couponSheet').classList.remove('active');}
 function selectCoupon(amount,name){
   selectedCoupon={amount,name};
-  const sct=document.getElementById('selCouponText');if(sct)sct.textContent='-'+name;
+  const sct=document.getElementById('selCouponText');
+  if(sct)sct.textContent=name==='不使用优惠券'?'选择优惠券':'-'+name;
+  if(sct)sct.classList.toggle('active',name!=='不使用优惠券');
   closeCouponSheet();renderConfirmOrder();
 }
+
+// Init
+renderConfirmOrder();
 </script>
 </body>
 </html>

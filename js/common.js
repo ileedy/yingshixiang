@@ -1,11 +1,13 @@
 // State
-let cart = [];
+let cart = (()=>{try{const raw=localStorage.getItem('cart');return raw?JSON.parse(raw):[];}catch(e){return[];}})();
 let currentOrderType = 'dine-in';
 let selectedCoupon = null;
 let currentDish = null;
 let modalQty = 1;
 let sendCodeCountdown = 0;
 let sendCodeTimer = null;
+
+function saveCart(){try{localStorage.setItem('cart',JSON.stringify(cart));}catch(e){}}
 
 // Dish data
 const dishes = [
@@ -127,6 +129,7 @@ function updateCart(){
   if(cnt){cnt.style.display=count>0?'flex':'none';cnt.textContent=count;}
   const priceEl=document.getElementById('cartBarPrice');
   if(priceEl)priceEl.textContent='¥'+total.toFixed(2);
+  saveCart();
 }
 
 function openCart(){
@@ -221,6 +224,7 @@ function doLogin(){showToast('登录成功');navigateTo('page-profile');}
 function reorder(){showToast('已加入购物车');navigateTo('page-menu');}
 function goToCheckout(){
   if(cart.length===0){showToast('购物车为空');return;}
+  saveCart();
   navigateTo('page-confirm');
 }
 
