@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>硬是香面馆</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+<div class="app" id="app">
+<div class="page" id="page-recharge">
+<div class="topbar"><div class="topbar-back" onclick="navigateTo('page-profile')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div><span class="topbar-t">充值中心</span><div style="width:32px"></div></div>
+<div class="s" style="text-align:center">
+  <div style="font-size:14px;color:#999">当前余额</div>
+  <div style="font-size:40px;font-weight:700;color:var(--color-coral-flame);margin-top:4px">¥86.50</div>
+</div>
+<div class="s">
+  <div style="font-size:15px;font-weight:600;margin-bottom:12px">选择充值金额</div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap">
+    <div class="rch-c" onclick="selectRecharge(this,50)"><div class="rch-amt">¥50</div><div class="rch-bns">送¥5</div></div>
+    <div class="rch-c sel" onclick="selectRecharge(this,100)"><div class="rch-amt">¥100</div><div class="rch-bns">送¥20</div></div>
+    <div class="rch-c" onclick="selectRecharge(this,200)"><div class="rch-amt">¥200</div><div class="rch-bns">送¥50</div></div>
+    <div class="rch-c" onclick="selectRecharge(this,500)"><div class="rch-amt">¥500</div><div class="rch-bns">送¥150</div></div>
+  </div>
+</div>
+<div class="s" style="padding-top:0;padding-bottom:100px">
+  <div class="card" style="background:var(--color-sunset-fade);margin-bottom:16px">
+    <div style="font-size:13px;color:#666">充值说明</div>
+    <div style="font-size:12px;color:#999;margin-top:6px;line-height:1.6">1. 充值金额实时到账<br>2. 充值赠送金额不可提现<br>3. 充值后可在余额支付中使用</div>
+  </div>
+  <button class="btn-f" style="width:100%;padding:16px;font-size:16px" onclick="showToast('充值成功')">立即充值 ¥100</button>
+</div>
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="../js/common.js"></script>
+</body>
+</html>

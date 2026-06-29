@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>硬是香面馆</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+<div class="app" id="app">
+<div class="page" id="page-messages">
+<div class="topbar"><div class="topbar-back" onclick="navigateTo('page-home')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div><span class="topbar-t">消息中心</span><div style="width:32px"></div></div>
+<div class="msg-i" onclick="showToast('订单通知详情')">
+  <div class="msg-ic" style="background:#fff3e0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff9800" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+  <div class="msg-ct"><div class="msg-tt">订单通知 <span style="font-size:11px;padding:2px 6px;border-radius:8px;background:var(--color-coral-flame);color:#fff">新</span></div><div class="msg-pv">您的招牌牛肉面已开始制作，请耐心等待</div><div class="msg-tm">5分钟前</div></div>
+  <div class="msg-ur"></div>
+</div>
+<div class="msg-i" onclick="showToast('新品上市')">
+  <div class="msg-ic" style="background:var(--color-sunset-fade)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+  <div class="msg-ct"><div class="msg-tt">新品上市</div><div class="msg-pv">夏日限定冰爽面系列上新，清凉一夏</div><div class="msg-tm">1小时前</div></div>
+  <div class="msg-ur"></div>
+</div>
+<div class="msg-i" onclick="showToast('订单完成')">
+  <div class="msg-ic" style="background:#e8f5e9"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+  <div class="msg-ct"><div class="msg-tt">您的订单已完成</div><div class="msg-pv">感谢您的惠顾，期待您的下次光临！</div><div class="msg-tm">3小时前</div></div>
+</div>
+<div class="msg-i" onclick="showToast('优惠券详情')">
+  <div class="msg-ic" style="background:#fce4ec"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e91e63" stroke-width="2"><path d="M20 12V8H6a2 2 0 01-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/></svg></div>
+  <div class="msg-ct"><div class="msg-tt">优惠券即将过期</div><div class="msg-pv">您有一张满20减5优惠券将于明天过期</div><div class="msg-tm">昨天</div></div>
+  <div class="msg-ur"></div>
+</div>
+<div class="msg-i" onclick="showToast('营业时间调整')">
+  <div class="msg-ic" style="background:#e3f2fd"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2196f3" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+  <div class="msg-ct"><div class="msg-tt">营业时间调整通知</div><div class="msg-pv">7月1日起万象城店营业时间调整为10:00-22:00</div><div class="msg-tm">2天前</div></div>
+</div>
+<div class="msg-i" onclick="showToast('会员日')">
+  <div class="msg-ic" style="background:#f3e5f5"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9c27b0" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+  <div class="msg-ct"><div class="msg-tt">会员日活动</div><div class="msg-pv">每周三会员日，全场积分翻倍</div><div class="msg-tm">3天前</div></div>
+</div>
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="../js/common.js"></script>
+</body>
+</html>

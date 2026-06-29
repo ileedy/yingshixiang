@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>硬是香面馆</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+<div class="app" id="app">
+<div class="page" id="page-coupons">
+<div class="topbar"><div class="topbar-back" onclick="navigateTo('page-profile')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div><span class="topbar-t">我的优惠券</span><div style="width:32px"></div></div>
+<div class="s" style="padding-top:8px">
+  <div class="tabs-r" style="margin:0"><div class="tab-p active" onclick="switchCouponTab(this,'available')">可用 (3)</div><div class="tab-p" onclick="switchCouponTab(this,'expired')">已过期 (2)</div></div>
+</div>
+<div id="couponList" style="padding-top:8px;padding-bottom:100px">
+  <div class="cpn-c"><div class="cpn-l" style="background:var(--gradient-coral-flame)"><div class="cpn-amt">¥5</div><div class="cpn-cond">满20可用</div></div><div class="cpn-r"><div class="cpn-nm">满20减5优惠券</div><div class="cpn-ds">全场通用</div><div class="cpn-exp">2026-07-15到期</div></div><div class="cpn-act"><span class="cpn-btn">去使用</span></div></div>
+  <div class="cpn-c"><div class="cpn-l" style="background:linear-gradient(135deg,#ff9800,#f57c00)"><div class="cpn-amt">¥8</div><div class="cpn-cond">满30可用</div></div><div class="cpn-r"><div class="cpn-nm">满30减8优惠券</div><div class="cpn-ds">全场通用</div><div class="cpn-exp">2026-07-31到期</div></div><div class="cpn-act"><span class="cpn-btn">去使用</span></div></div>
+  <div class="cpn-c"><div class="cpn-l" style="background:linear-gradient(135deg,#9c27b0,#7b1fa2)"><div class="cpn-amt">¥15</div><div class="cpn-cond">满50可用</div></div><div class="cpn-r"><div class="cpn-nm">满50减15优惠券</div><div class="cpn-ds">限招牌面食</div><div class="cpn-exp">2026-08-15到期</div></div><div class="cpn-act"><span class="cpn-btn">去使用</span></div></div>
+</div>
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="../js/common.js"></script>
+</body>
+</html>

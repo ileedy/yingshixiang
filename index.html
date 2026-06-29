@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>硬是香面馆</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/common.css">
+</head>
+<body>
+<div class="app" id="app">
+<div class="page active" id="page-home">
+
+<!-- Immersive Hero Banner Carousel -->
+<div id="heroBanner" style="position:relative;width:100%;height:320px;overflow:hidden;background:linear-gradient(160deg,#2d1810 0%,#4a2418 30%,#6b3320 60%,#8b4528 100%)">
+  <!-- Slides container -->
+  <div id="heroTrack" style="display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1);height:100%">
+
+    <!-- Slide 1 -->
+    <div class="hero-sl" style="min-width:100%;position:relative;height:100%">
+      <div style="position:absolute;inset:0;background:url('./image/banner-hero-bg.jpg') center/cover;opacity:.55;transition:transform 6s ease-out" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,transparent 30%,transparent 60%,rgba(45,24,16,.85) 100%)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(247,59,32,.12) 0%,transparent 50%)"></div>
+      <!-- Floating deco -->
+      <div style="position:absolute;top:30px;right:20px;opacity:.15;animation:heroFloat 6s ease-in-out infinite"><svg width="80" height="80" viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,.15)"/><path d="M25 50 Q40 20 55 50" stroke="rgba(255,255,255,.5)" stroke-width="3" fill="none"/><circle cx="32" cy="38" r="3" fill="rgba(255,200,100,.5)"/><circle cx="48" cy="35" r="2.5" fill="rgba(255,180,80,.4)"/></svg></div>
+      <div style="position:absolute;top:80px;left:15px;opacity:.1;animation:heroFloat 8s ease-in-out infinite 1.5s"><svg width="60" height="60" viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="28" fill="rgba(255,255,255,.12)"/><rect x="18" y="25" width="24" height="16" rx="3" stroke="rgba(255,255,255,.4)" stroke-width="2" fill="none"/></svg></div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="hero-sl" style="min-width:100%;position:relative;height:100%">
+      <div style="position:absolute;inset:0;background:url('./image/banner-hero-2.jpg') center/cover;opacity:.55"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.2) 0%,transparent 30%,transparent 55%,rgba(60,30,15,.9) 100%)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,152,0,.1) 0%,transparent 50%)"></div>
+      <!-- Floating deco -->
+      <div style="position:absolute;top:50px;right:30px;opacity:.12;animation:heroFloat 7s ease-in-out infinite .5s"><svg width="70" height="70" viewBox="0 0 70 70" fill="none"><circle cx="35" cy="35" r="33" fill="rgba(255,255,255,.1)"/><path d="M20 35 Q35 15 50 35" stroke="rgba(255,220,150,.4)" stroke-width="2.5" fill="none"/><path d="M25 38 Q35 22 45 38" stroke="rgba(255,220,150,.25)" stroke-width="2" fill="none"/></svg></div>
+      <div style="position:absolute;bottom:100px;left:20px;opacity:.1;animation:heroFloat 9s ease-in-out infinite 2s"><svg width="55" height="55" viewBox="0 0 55 55" fill="none"><circle cx="27" cy="27" r="25" fill="rgba(255,255,255,.08)"/><path d="M15 25h24M27 13v24" stroke="rgba(255,255,255,.3)" stroke-width="2" stroke-linecap="round"/></svg></div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="hero-sl" style="min-width:100%;position:relative;height:100%">
+      <div style="position:absolute;inset:0;background:url('./image/banner-hero-3.jpg') center/cover;opacity:.5"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25) 0%,transparent 25%,transparent 50%,rgba(40,20,30,.9) 100%)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(170deg,rgba(247,59,32,.15) 0%,transparent 40%)"></div>
+      <!-- Floating deco -->
+      <div style="position:absolute;top:40px;left:25px;opacity:.12;animation:heroFloat 6.5s ease-in-out infinite 1s"><svg width="65" height="65" viewBox="0 0 65 65" fill="none"><circle cx="32" cy="32" r="30" fill="rgba(255,255,255,.08)"/><circle cx="25" cy="28" r="4" fill="rgba(247,59,32,.3)"/><circle cx="40" cy="38" r="3" fill="rgba(255,200,100,.3)"/></svg></div>
+      <div style="position:absolute;top:60px;right:15px;opacity:.1;animation:heroFloat 8s ease-in-out infinite 2.5s"><svg width="50" height="50" viewBox="0 0 50 50" fill="none"><path d="M10 30 Q25 10 40 30" stroke="rgba(255,180,100,.4)" stroke-width="2" fill="none"/><circle cx="25" cy="22" r="5" stroke="rgba(255,255,255,.25)" stroke-width="1.5" fill="none"/></svg></div>
+    </div>
+  </div>
+
+  <!-- Top Nav (overlaid on banner) -->
+  <div style="position:absolute;top:0;left:0;right:0;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;z-index:10;animation:cpFadeUp .6s .2s both">
+    <div style="display:flex;align-items:center;gap:10px;cursor:pointer" onclick="showToast('门店选择')">
+      <div style="width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.3);border:2px solid rgba(255,255,255,.2)"><img src="./image/brand-logo.jpg" style="width:100%;height:100%;object-fit:cover" alt="logo"></div>
+      <div>
+        <div style="font-size:17px;font-weight:800;letter-spacing:1.5px;color:#fff;line-height:1.2;text-shadow:0 1px 4px rgba(0,0,0,.3)">硬是香面馆</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:3px;margin-top:2px">万象城店 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="3"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <div style="width:36px;height:36px;border-radius:12px;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;cursor:pointer" onclick="showToast('搜索')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <div style="width:36px;height:36px;border-radius:12px;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative" onclick="navigateTo('page-messages')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div style="position:absolute;top:6px;right:6px;width:8px;height:8px;border-radius:50%;background:#f73b20;border:2px solid rgba(45,24,16,.8)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero text content (changes per slide) -->
+  <div id="heroContent" style="position:absolute;bottom:0;left:0;right:0;padding:0 20px 20px;z-index:5">
+    <div style="display:flex;align-items:flex-end;gap:16px">
+      <div style="flex:1" id="heroText">
+        <!-- Brand tagline -->
+        <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:6px 14px;border-radius:20px;margin-bottom:10px;border:1px solid rgba(255,255,255,.1)">
+          <div style="width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px rgba(74,222,128,.5)"></div>
+          <span id="heroTag" style="font-size:11px;color:rgba(255,255,255,.85);font-weight:600;letter-spacing:1px">营业中 · 新鲜现做</span>
+        </div>
+        <!-- Main headline -->
+        <div id="heroTitle" style="font-size:28px;font-weight:900;color:#fff;letter-spacing:2px;line-height:1.2;text-shadow:0 2px 12px rgba(0,0,0,.3);transition:opacity .4s">一碗好面<br/>温暖一座城</div>
+        <!-- Sub text -->
+        <div id="heroSub" style="font-size:13px;color:rgba(255,255,255,.65);margin-top:8px;letter-spacing:.5px;transition:opacity .4s">拒绝预制 · 匠心手作 · 食材可溯源</div>
+      </div>
+      <!-- Right side food bowl illustration -->
+      <div style="flex-shrink:0;animation:heroFloat 5s ease-in-out infinite">
+        <svg width="110" height="100" viewBox="0 0 110 100" fill="none">
+          <ellipse cx="55" cy="72" rx="48" ry="22" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+          <path d="M12 55 Q12 80 55 80 Q98 80 98 55" fill="rgba(255,200,100,.15)" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>
+          <path d="M35 45 Q38 32 35 22" stroke="rgba(255,255,255,.35)" stroke-width="2" stroke-linecap="round" fill="none"><animate attributeName="d" values="M35 45 Q38 32 35 22;M35 45 Q32 30 35 20;M35 45 Q38 32 35 22" dur="3s" repeatCount="indefinite"/></path>
+          <path d="M55 42 Q58 28 55 18" stroke="rgba(255,255,255,.3)" stroke-width="2" stroke-linecap="round" fill="none"><animate attributeName="d" values="M55 42 Q58 28 55 18;M55 42 Q52 26 55 16;M55 42 Q58 28 55 18" dur="2.5s" repeatCount="indefinite"/></path>
+          <path d="M72 44 Q75 30 72 20" stroke="rgba(255,255,255,.25)" stroke-width="2" stroke-linecap="round" fill="none"><animate attributeName="d" values="M72 44 Q75 30 72 20;M72 44 Q69 28 72 18;M72 44 Q75 30 72 20" dur="3.5s" repeatCount="indefinite"/></path>
+          <path d="M25 55 Q35 48 45 55 Q55 62 65 55 Q75 48 85 55" stroke="rgba(255,220,150,.4)" stroke-width="2" fill="none"/>
+          <path d="M30 60 Q40 53 50 60 Q60 67 70 60 Q80 53 88 60" stroke="rgba(255,200,120,.3)" stroke-width="2" fill="none"/>
+          <circle cx="40" cy="52" r="2" fill="rgba(247,59,32,.5)"/><circle cx="65" cy="54" r="1.5" fill="rgba(247,59,32,.4)"/><circle cx="52" cy="58" r="1.8" fill="rgba(247,59,32,.35)"/>
+          <line x1="45" y1="50" x2="48" y2="45" stroke="rgba(100,200,100,.5)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="60" y1="52" x2="63" y2="47" stroke="rgba(100,200,100,.4)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="38" y1="30" x2="62" y2="55" stroke="rgba(255,255,255,.3)" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="42" y1="28" x2="66" y2="53" stroke="rgba(255,255,255,.25)" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+    <!-- Carousel dots -->
+    <div id="heroDots" style="display:flex;justify-content:center;gap:6px;margin-top:16px">
+      <div class="hero-dot active" onclick="goToHeroSlide(0)"></div>
+      <div class="hero-dot" onclick="goToHeroSlide(1)"></div>
+      <div class="hero-dot" onclick="goToHeroSlide(2)"></div>
+    </div>
+  </div>
+  
+  <!-- Bottom curved fade -->
+  <div style="position:absolute;bottom:0;left:0;right:0;height:50px;background:linear-gradient(to bottom,transparent,#f7f3f0);z-index:6;pointer-events:none"></div>
+</div>
+
+<!-- Quick Entry Row -->
+<div style="padding:20px 16px 12px;display:flex;align-items:center;gap:10px" class="anim-scale anim-scale-1">
+  <!-- Order Now -->
+  <div style="flex-shrink:0;background:linear-gradient(135deg,var(--color-coral-flame),#ff6b35);padding:14px 22px;border-radius:20px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(247,59,32,.3);transition:all .2s" onclick="startOrder('dine-in')" onmouseenter="this.style.transform='translateY(-2px)'" onmouseleave="this.style.transform='translateY(0)'">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+    <span style="font-size:16px;font-weight:800;color:#fff;letter-spacing:1px">立即点餐</span>
+  </div>
+  <!-- Divider -->
+  <div style="width:1px;height:32px;background:rgba(0,0,0,.08)"></div>
+  <!-- Categories with icons -->
+  <div style="flex:1;display:flex;justify-content:space-between;align-items:center;gap:4px">
+    <div style="text-align:center;cursor:pointer;padding:6px 4px;border-radius:12px;transition:background .15s" onclick="goToCategory(0)" onmouseenter="this.style.background='rgba(247,59,32,.06)'" onmouseleave="this.style.background='transparent'">
+      <div style="width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#fff5f0,#ffe0d3);margin:0 auto 4px;display:flex;align-items:center;justify-content:center">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1.5 2.5 4 4.5 4 7a4 4 0 01-8 0c0-2.5 2.5-4.5 4-7z"/><path d="M10 16v2"/><path d="M14 16v2"/><path d="M12 16v2"/><line x1="8" y1="20" x2="16" y2="20"/><path d="M6 20c0 0 0 2 6 2s6-2 6-2"/></svg>
+      </div>
+      <div style="font-size:12px;font-weight:700;color:var(--color-brandwood)">汤面</div>
+    </div>
+    <div style="text-align:center;cursor:pointer;padding:6px 4px;border-radius:12px;transition:background .15s" onclick="goToCategory(1)" onmouseenter="this.style.background='rgba(255,152,0,.06)'" onmouseleave="this.style.background='transparent'">
+      <div style="width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#fff3e0,#ffe0b2);margin:0 auto 4px;display:flex;align-items:center;justify-content:center">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff9800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l3-9 4 18 3-9h6"/></svg>
+      </div>
+      <div style="font-size:12px;font-weight:700;color:var(--color-brandwood)">拌面</div>
+    </div>
+    <div style="text-align:center;cursor:pointer;padding:6px 4px;border-radius:12px;transition:background .15s" onclick="goToCategory(3)" onmouseenter="this.style.background='rgba(233,30,99,.06)'" onmouseleave="this.style.background='transparent'">
+      <div style="width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#fce4ec,#f8bbd0);margin:0 auto 4px;display:flex;align-items:center;justify-content:center">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e91e63" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l3 6-9 8-9-8 3-6z"/><path d="M12 17l-3 4h6l-3-4z"/></svg>
+      </div>
+      <div style="font-size:12px;font-weight:700;color:var(--color-brandwood)">卤菜</div>
+    </div>
+    <div style="text-align:center;cursor:pointer;padding:6px 4px;border-radius:12px;transition:background .15s" onclick="goToCategory(5)" onmouseenter="this.style.background='rgba(33,150,243,.06)'" onmouseleave="this.style.background='transparent'">
+      <div style="width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#e3f2fd,#bbdefb);margin:0 auto 4px;display:flex;align-items:center;justify-content:center">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2196f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+      </div>
+      <div style="font-size:12px;font-weight:700;color:var(--color-brandwood)">饮品</div>
+    </div>
+  </div>
+</div>
+
+<!-- Quality + Kitchen Live Camera -->
+<div style="padding:32px 16px 36px;background:linear-gradient(180deg,#faf8f5,#fff5f0);position:relative" class="anim-up anim-up-3">
+  <!-- Section Header -->
+  <div style="text-align:center;margin-bottom:24px">
+    <div style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--color-coral-flame);background:rgba(247,59,32,.06);padding:6px 16px;border-radius:20px;letter-spacing:1px;border:1.5px solid rgba(247,59,32,.1)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      明厨亮灶 · 实时监控
+    </div>
+    <div style="font-size:26px;font-weight:800;color:var(--color-brandwood);letter-spacing:3px;margin-top:12px">拒绝预制浇头</div>
+    <div style="font-size:13px;color:#999;margin-top:6px;font-weight:500">每日新鲜现做，食材可溯源，每一碗面都经得起直播</div>
+  </div>
+
+  <!-- Live Camera Card -->
+  <div style="background:linear-gradient(145deg,#2a2a2a,#1a1a1a);border-radius:24px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.2);position:relative">
+    <!-- Camera Top Bar -->
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,.3));position:relative;z-index:10">
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="display:flex;align-items:center;gap:4px;background:rgba(244,67,54,.2);padding:3px 8px;border-radius:6px;border:1px solid rgba(244,67,54,.3)">
+          <div style="width:7px;height:7px;border-radius:50%;background:#f44336" class="cam-rec"></div>
+          <span style="font-size:10px;font-weight:700;color:#f44336;letter-spacing:1px">LIVE</span>
+        </div>
+        <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,.85)">后厨一号机</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="display:flex;align-items:center;gap:3px">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          <span style="font-size:11px;color:rgba(255,255,255,.6)">128 人在看</span>
+        </div>
+        <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:monospace" id="camTime">12:34:56</span>
+      </div>
+    </div>
+
+    <!-- Camera Frame -->
+    <div style="position:relative;height:200px;overflow:hidden;background:#1a1a1a">
+      <!-- Kitchen Image -->
+      <img src="./image/food-trace-hero.jpg" style="width:100%;height:100%;object-fit:cover;opacity:.85" alt="后厨实时画面">
+      <!-- Scan Line -->
+      <div class="cam-scan"></div>
+      <!-- Center Cross -->
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;pointer-events:none;z-index:4">
+        <div style="position:absolute;top:0;left:50%;width:1px;height:100%;background:rgba(255,255,255,.2);transform:translateX(-50%)"></div>
+        <div style="position:absolute;top:50%;left:0;width:100%;height:1px;background:rgba(255,255,255,.2);transform:translateY(-50%)"></div>
+      </div>
+      <!-- Watermark -->
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:3">
+        <div style="font-size:24px;font-weight:900;color:rgba(255,255,255,.06);letter-spacing:8px;transform:rotate(-15deg)">实时监控</div>
+      </div>
+      <!-- Corner Brackets -->
+      <div style="position:absolute;top:8px;left:8px;width:20px;height:20px;border-top:2px solid rgba(255,255,255,.4);border-left:2px solid rgba(255,255,255,.4);pointer-events:none;z-index:6"></div>
+      <div style="position:absolute;top:8px;right:8px;width:20px;height:20px;border-top:2px solid rgba(255,255,255,.4);border-right:2px solid rgba(255,255,255,.4);pointer-events:none;z-index:6"></div>
+      <div style="position:absolute;bottom:8px;left:8px;width:20px;height:20px;border-bottom:2px solid rgba(255,255,255,.4);border-left:2px solid rgba(255,255,255,.4);pointer-events:none;z-index:6"></div>
+      <div style="position:absolute;bottom:8px;right:8px;width:20px;height:20px;border-bottom:2px solid rgba(255,255,255,.4);border-right:2px solid rgba(255,255,255,.4);pointer-events:none;z-index:6"></div>
+      <!-- Play Overlay Button -->
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:7;cursor:pointer" onclick="showToast('正在连接后厨摄像头...')">
+        <div style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,.3);transition:all .3s">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff" style="margin-left:3px"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Camera Bottom Bar -->
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:linear-gradient(0deg,rgba(0,0,0,.6),rgba(0,0,0,.3));position:relative;z-index:10">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="display:flex;align-items:center;gap:4px">
+          <div class="cam-signal" style="position:relative;width:8px;height:8px;border-radius:50%;background:#4caf50"></div>
+          <span style="font-size:11px;color:rgba(255,255,255,.6)">信号良好</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:4px">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span style="font-size:11px;color:rgba(255,255,255,.6)">后厨操作台</span>
+        </div>
+      </div>
+      <div class="cam-live-btn" style="display:flex;align-items:center;gap:4px;background:var(--color-coral-flame);padding:6px 14px;border-radius:20px;cursor:pointer" onclick="showToast('正在进入直播间...')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <span style="font-size:12px;font-weight:700;color:#fff">进入直播间</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quality Badges -->
+  <div style="display:flex;gap:10px;margin-top:16px">
+    <div style="flex:1;background:#fff;padding:14px 10px;border-radius:16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04)">
+      <div style="width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);display:flex;align-items:center;justify-content:center;margin:0 auto 8px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <div style="font-size:12px;font-weight:700;color:var(--color-brandwood)">新鲜现做</div>
+      <div style="font-size:10px;color:#bbb;margin-top:2px">拒绝隔夜</div>
+    </div>
+    <div style="flex:1;background:#fff;padding:14px 10px;border-radius:16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04)">
+      <div style="width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,#fff3e0,#ffe0b2);display:flex;align-items:center;justify-content:center;margin:0 auto 8px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff9800" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div style="font-size:12px;font-weight:700;color:var(--color-brandwood)">食材溯源</div>
+      <div style="font-size:10px;color:#bbb;margin-top:2px">源头可查</div>
+    </div>
+    <div style="flex:1;background:#fff;padding:14px 10px;border-radius:16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04)">
+      <div style="width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,#e3f2fd,#bbdefb);display:flex;align-items:center;justify-content:center;margin:0 auto 8px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2196f3" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      </div>
+      <div style="font-size:12px;font-weight:700;color:var(--color-brandwood)">全程直播</div>
+      <div style="font-size:10px;color:#bbb;margin-top:2px">透明可见</div>
+    </div>
+    <div style="flex:1;background:#fff;padding:14px 10px;border-radius:16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04)">
+      <div style="width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,#fce4ec,#f8bbd9);display:flex;align-items:center;justify-content:center;margin:0 auto 8px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e91e63" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      </div>
+      <div style="font-size:12px;font-weight:700;color:var(--color-brandwood)">用心做好面</div>
+      <div style="font-size:10px;color:#bbb;margin-top:2px">匠心出品</div>
+    </div>
+  </div>
+
+  <!-- Trace Link -->
+  <div style="padding:0 16px;margin-top:20px">
+    <div style="background:linear-gradient(135deg,#fff8f5 0%,#fff 100%);border:1.5px dashed rgba(247,59,32,.18);border-radius:18px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .25s;box-shadow:0 2px 10px rgba(247,59,32,.04);position:relative;overflow:hidden" onclick="navigateTo('page-trace')" onmouseenter="this.style.borderColor='rgba(247,59,32,.4)';this.style.boxShadow='0 6px 20px rgba(247,59,32,.1)';this.style.transform='translateY(-2px)'" onmouseleave="this.style.borderColor='rgba(247,59,32,.18)';this.style.boxShadow='0 2px 10px rgba(247,59,32,.04)';this.style.transform='translateY(0)'">
+      <!-- Decorative bg circle -->
+      <div style="position:absolute;right:-20px;top:-20px;width:80px;height:80px;border-radius:50%;background:rgba(247,59,32,.04)"></div>
+      <div style="display:flex;align-items:center;gap:12px;position:relative;z-index:1">
+        <div style="width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--color-coral-flame),#ff6b35);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(247,59,32,.25)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div>
+          <div style="font-size:15px;font-weight:700;color:var(--color-brandwood);letter-spacing:.5px">查看完整食材溯源链</div>
+          <div style="font-size:11px;color:#bbb;margin-top:2px">从源头到餐桌，每一环都透明可见</div>
+        </div>
+      </div>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2.5" stroke-linecap="round" style="position:relative;z-index:1;flex-shrink:0"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- Popular Picks - Hot Selling -->
+<div style="padding:32px 0 24px" class="anim-up anim-up-4">
+  <!-- Section header -->
+  <div style="padding:0 16px;display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:20px">
+    <div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+        <div style="width:4px;height:22px;background:linear-gradient(180deg,var(--color-coral-flame),#ff6b35);border-radius:2px"></div>
+        <div style="font-size:22px;font-weight:800;letter-spacing:2px">人气推荐</div>
+      </div>
+      <div style="font-size:12px;color:#bbb;letter-spacing:.5px;padding-left:12px">每日精选 · 好评如潮</div>
+    </div>
+    <div style="font-size:13px;color:var(--color-coral-flame);font-weight:600;cursor:pointer;display:flex;align-items:center;gap:2px;padding:6px 14px;background:var(--color-sunset-fade);border-radius:20px;transition:all .2s" onclick="navigateTo('page-menu')" onmouseenter="this.style.background='rgba(247,59,32,.12)'" onmouseleave="this.style.background='var(--color-sunset-fade)'">
+      更多
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
+  </div>
+
+  <!-- Horizontal scroll cards -->
+  <div style="display:flex;gap:14px;overflow-x:auto;padding:4px 16px 8px" class="scroll-r">
+
+    <!-- Card 1 -->
+    <div class="pop-card" style="min-width:170px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.06);cursor:pointer;transition:all .3s cubic-bezier(.34,1.56,.64,1)" onclick="startOrder('dine-in')" onmouseenter="this.style.transform='translateY(-6px)';this.style.boxShadow='0 14px 32px rgba(0,0,0,.1)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 14px rgba(0,0,0,.06)'">
+      <div style="height:140px;overflow:hidden;position:relative">
+        <img src="./image/dish-signature-beef.jpg" style="width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.4,0,.2,1)" alt="招牌牛肉面" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform='scale(1)'">
+        <!-- Ribbon tag top-right -->
+        <div style="position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 44px 44px 0;border-color:transparent #f73b20 transparent transparent"></div>
+        <span style="position:absolute;top:7px;right:4px;font-size:10px;color:#fff;font-weight:700;transform:rotate(45deg);letter-spacing:.5px">招牌</span>
+      </div>
+      <div style="padding:14px">
+        <div style="font-size:15px;font-weight:700;letter-spacing:.5px">招牌牛肉面</div>
+        <div style="display:flex;align-items:center;gap:4px;margin-top:6px">
+          <span style="font-size:11px;color:#f59e0b">★★★★★</span>
+          <span style="font-size:11px;color:#999;font-weight:600">4.9</span>
+          <span style="font-size:10px;color:#ccc">· 好评率 98%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+          <span style="font-size:18px;font-weight:900;color:var(--color-coral-flame)">¥26</span>
+          <span style="font-size:11px;color:#bbb">月售 856</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="pop-card" style="min-width:170px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.06);cursor:pointer;transition:all .3s cubic-bezier(.34,1.56,.64,1)" onclick="startOrder('dine-in')" onmouseenter="this.style.transform='translateY(-6px)';this.style.boxShadow='0 14px 32px rgba(0,0,0,.1)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 14px rgba(0,0,0,.06)'">
+      <div style="height:140px;overflow:hidden;position:relative">
+        <img src="./image/dish-sour-fish.jpg" style="width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.4,0,.2,1)" alt="酸菜鱼面" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform='scale(1)'">
+        <div style="position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 44px 44px 0;border-color:transparent #ff6b35 transparent transparent"></div>
+        <span style="position:absolute;top:7px;right:4px;font-size:10px;color:#fff;font-weight:700;transform:rotate(45deg);letter-spacing:.5px">人气</span>
+      </div>
+      <div style="padding:14px">
+        <div style="font-size:15px;font-weight:700;letter-spacing:.5px">老坛酸菜鱼面</div>
+        <div style="display:flex;align-items:center;gap:4px;margin-top:6px">
+          <span style="font-size:11px;color:#f59e0b">★★★★★</span>
+          <span style="font-size:11px;color:#999;font-weight:600">4.8</span>
+          <span style="font-size:10px;color:#ccc">· 好评率 96%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+          <span style="font-size:18px;font-weight:900;color:var(--color-coral-flame)">¥32</span>
+          <span style="font-size:11px;color:#bbb">月售 623</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="pop-card" style="min-width:170px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.06);cursor:pointer;transition:all .3s cubic-bezier(.34,1.56,.64,1)" onclick="startOrder('dine-in')" onmouseenter="this.style.transform='translateY(-6px)';this.style.boxShadow='0 14px 32px rgba(0,0,0,.1)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 14px rgba(0,0,0,.06)'">
+      <div style="height:140px;overflow:hidden;position:relative">
+        <img src="./image/dish-dandan-noodle.jpg" style="width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.4,0,.2,1)" alt="担担面" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform='scale(1)'">
+        <div style="position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 44px 44px 0;border-color:transparent #22c55e transparent transparent"></div>
+        <span style="position:absolute;top:7px;right:4px;font-size:10px;color:#fff;font-weight:700;transform:rotate(45deg);letter-spacing:.5px">经典</span>
+      </div>
+      <div style="padding:14px">
+        <div style="font-size:15px;font-weight:700;letter-spacing:.5px">担担面</div>
+        <div style="display:flex;align-items:center;gap:4px;margin-top:6px">
+          <span style="font-size:11px;color:#f59e0b">★★★★☆</span>
+          <span style="font-size:11px;color:#999;font-weight:600">4.7</span>
+          <span style="font-size:10px;color:#ccc">· 好评率 94%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+          <span style="font-size:18px;font-weight:900;color:var(--color-coral-flame)">¥16</span>
+          <span style="font-size:11px;color:#bbb">月售 412</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="pop-card" style="min-width:170px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.06);cursor:pointer;transition:all .3s cubic-bezier(.34,1.56,.64,1)" onclick="startOrder('dine-in')" onmouseenter="this.style.transform='translateY(-6px)';this.style.boxShadow='0 14px 32px rgba(0,0,0,.1)'" onmouseleave="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 14px rgba(0,0,0,.06)'">
+      <div style="height:140px;overflow:hidden;position:relative">
+        <img src="./image/dish-sour-fish.jpg" style="width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.4,0,.2,1);filter:hue-rotate(-20deg) saturate(1.3)" alt="红油抄手面" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform='scale(1)'">
+        <div style="position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 44px 44px 0;border-color:transparent #8b5cf6 transparent transparent"></div>
+        <span style="position:absolute;top:7px;right:4px;font-size:10px;color:#fff;font-weight:700;transform:rotate(45deg);letter-spacing:.5px">新品</span>
+      </div>
+      <div style="padding:14px">
+        <div style="font-size:15px;font-weight:700;letter-spacing:.5px">红油抄手面</div>
+        <div style="display:flex;align-items:center;gap:4px;margin-top:6px">
+          <span style="font-size:11px;color:#f59e0b">★★★★★</span>
+          <span style="font-size:11px;color:#999;font-weight:600">4.9</span>
+          <span style="font-size:10px;color:#ccc">· 好评率 99%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+          <span style="font-size:18px;font-weight:900;color:var(--color-coral-flame)">¥28</span>
+          <span style="font-size:11px;color:#bbb">月售 387</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Marketing Cards V2 -->
+<div style="padding:0 16px 32px" class="anim-up anim-up-5">
+  <!-- Row 1: Two big cards with illustrations -->
+  <div style="display:flex;gap:12px;margin-bottom:12px">
+    <!-- Points Mall -->
+    <div class="mk-big" style="flex:1;background:linear-gradient(135deg,#ffb74d 0%,#ff9800 50%,#f57c00 100%);padding:20px 16px;border-radius:24px;box-shadow:0 6px 20px rgba(255,152,0,.25);min-height:160px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden" onclick="navigateTo('page-points-mall')">
+      <!-- Decorative circles -->
+      <div style="position:absolute;top:-30px;right:-30px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.08)"></div>
+      <div style="position:absolute;bottom:-20px;left:-20px;width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.06)"></div>
+      <div style="position:relative;z-index:2">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between">
+          <div>
+            <div style="font-size:18px;font-weight:800;color:#fff;letter-spacing:1px;text-shadow:0 1px 2px rgba(0,0,0,.1)">积分商城</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.85);font-weight:500;margin-top:4px">已有 1,280 积分</div>
+          </div>
+          <img src="./image/card-points.jpg" style="width:56px;height:56px;border-radius:14px;object-fit:cover;border:2px solid rgba(255,255,255,.3);box-shadow:0 4px 12px rgba(0,0,0,.15);transform:rotate(6deg);flex-shrink:0" alt="积分商城">
+        </div>
+        <div style="font-size:13px;color:rgba(255,255,255,.9);line-height:1.6;font-weight:500;margin-top:10px">海量好物 免费兑换</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;position:relative;z-index:2;margin-top:8px">
+        <div style="display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.2);padding:6px 14px;border-radius:20px;font-size:12px;color:#fff;font-weight:600;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.25)">
+          去兑换
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+    </div>
+    <!-- Invite -->
+    <div class="mk-big" style="flex:1;background:linear-gradient(135deg,#ff6b6b 0%,#ee5a5a 50%,#d32f2f 100%);padding:20px 16px;border-radius:24px;box-shadow:0 6px 20px rgba(211,47,47,.25);min-height:160px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden" onclick="showToast('邀请有礼')">
+      <div style="position:absolute;top:-30px;right:-30px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.08)"></div>
+      <div style="position:absolute;bottom:-20px;left:-20px;width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.06)"></div>
+      <div style="position:relative;z-index:2">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between">
+          <div>
+            <div style="font-size:18px;font-weight:800;color:#fff;letter-spacing:1px;text-shadow:0 1px 2px rgba(0,0,0,.1)">邀请有礼</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.85);font-weight:500;margin-top:4px">已邀请 3 位好友</div>
+          </div>
+          <img src="./image/card-invite.jpg" style="width:56px;height:56px;border-radius:14px;object-fit:cover;border:2px solid rgba(255,255,255,.3);box-shadow:0 4px 12px rgba(0,0,0,.15);transform:rotate(-6deg);flex-shrink:0" alt="邀请有礼">
+        </div>
+        <div style="font-size:13px;color:rgba(255,255,255,.9);line-height:1.6;font-weight:500;margin-top:10px">邀好友得券 赢现金红包</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;position:relative;z-index:2;margin-top:8px">
+        <div style="display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.2);padding:6px 14px;border-radius:20px;font-size:12px;color:#fff;font-weight:600;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.25)">
+          立即邀请
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Row 2: Daily Check-in (wide card) -->
+  <div class="mk-wide" style="background:linear-gradient(90deg,#4caf50 0%,#66bb6a 40%,#81c784 100%);padding:18px 20px;border-radius:24px;box-shadow:0 6px 20px rgba(76,175,80,.25);display:flex;align-items:center;gap:16px;position:relative;overflow:hidden" onclick="showToast('每日签到+10积分')">
+    <div style="position:absolute;top:-30px;right:-30px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.08)"></div>
+    <img src="./image/card-checkin.jpg" style="width:64px;height:64px;border-radius:16px;object-fit:cover;border:2px solid rgba(255,255,255,.3);box-shadow:0 4px 12px rgba(0,0,0,.15);flex-shrink:0;position:relative;z-index:2" alt="每日签到">
+    <div style="flex:1;position:relative;z-index:2">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+        <div style="font-size:18px;font-weight:800;color:#fff;letter-spacing:1px;text-shadow:0 1px 2px rgba(0,0,0,.1)">每日签到</div>
+        <div style="font-size:10px;font-weight:700;color:#2e7d32;background:#c8e6c9;padding:2px 8px;border-radius:10px">+10积分</div>
+        <div style="font-size:10px;font-weight:700;color:#e65100;background:#ffeb3b;padding:2px 8px;border-radius:10px">双倍</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;margin-top:6px">
+        <span style="font-size:11px;color:rgba(255,255,255,.85);font-weight:500">连续</span>
+        <div style="display:flex;gap:5px">
+          <div class="mk-streak-dot active"></div>
+          <div class="mk-streak-dot active"></div>
+          <div class="mk-streak-dot active"></div>
+          <div class="mk-streak-dot active"></div>
+          <div class="mk-streak-dot active"></div>
+          <div class="mk-streak-dot"></div>
+          <div class="mk-streak-dot"></div>
+        </div>
+        <span style="font-size:11px;color:rgba(255,255,255,.85);font-weight:500">5天</span>
+      </div>
+    </div>
+    <div style="flex-shrink:0;position:relative;z-index:2">
+      <div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);border:1.5px solid rgba(255,255,255,.3)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- end page-home -->
+
+</div>
+<div id="toast" class="toast"></div>
+  <div class="bnav" id="bottomNav">
+      <div class="ni active" onclick="window.location.href='index.html'"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>首页</span></div>
+      <div class="ni" onclick="window.location.href='html/menu.html'"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg><span>点餐</span></div>
+      <div class="ni" onclick="window.location.href='html/orders.html'"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg><span>订单</span></div>
+      <div class="ni" onclick="window.location.href='html/profile.html'"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>我的</span></div>
+  </div>
+<script src="./js/common.js"></script>
+</body>
+</html>

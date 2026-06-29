@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>硬是香面馆</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+<div class="app" id="app">
+<div class="page" id="page-login">
+<div style="padding:60px 24px 24px;text-align:center">
+  <div style="width:80px;height:80px;border-radius:24px;background:var(--gradient-coral-flame);margin:0 auto 24px;display:flex;align-items:center;justify-content:center"><span style="color:#fff;font-size:32px;font-weight:700">香</span></div>
+  <div style="font-size:24px;font-weight:700;letter-spacing:2px;color:var(--color-coral-flame)">硬是香面馆</div>
+  <div style="font-size:14px;color:#999;margin-top:8px">登录享更多专属优惠</div>
+</div>
+<div class="s">
+  <input class="inp" placeholder="请输入手机号码" type="tel" maxlength="11" style="font-size:16px;margin-bottom:16px">
+  <div style="display:flex;gap:12px;margin-bottom:24px">
+    <input class="inp" placeholder="验证码" type="tel" maxlength="6" style="flex:1;font-size:16px">
+    <button class="btn-o btn-s" style="white-space:nowrap;flex-shrink:0" id="sendCodeBtn" onclick="sendCode()">获取验证码</button>
+  </div>
+  <button class="btn-f" style="width:100%;padding:16px;font-size:16px;margin-bottom:16px" onclick="doLogin()">一键登录</button>
+  <div style="text-align:center;margin-bottom:16px;font-size:13px;color:#999">其他登录方式</div>
+  <button class="btn-o" style="width:100%;border-color:#07c160;color:#07c160;display:flex;align-items:center;justify-content:center;gap:8px" onclick="showToast('微信登录')">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#07c160" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8.5 11a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm7 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/></svg>微信登录
+  </button>
+</div>
+<div style="text-align:center;padding:16px">
+  <div class="ckb" style="justify-content:center;gap:6px" onclick="toggleAgreement()">
+    <div class="ckb-box ck" id="agrBox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <span style="font-size:12px;color:#999">我已阅读并同意 <span style="color:var(--color-coral-flame)">《用户协议》</span>和<span style="color:var(--color-coral-flame)">《隐私政策》</span></span>
+  </div>
+</div>
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="../js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>硬是香面馆</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+<div class="app" id="app">
+<div class="page" id="page-address">
+<div class="topbar"><div class="topbar-back" onclick="navigateTo('page-profile')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div><span class="topbar-t">地址管理</span><div style="width:32px"></div></div>
+<div id="addressList">
+  <div class="addr-c sel" style="margin-top:12px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:15px;font-weight:600">张三</span><span style="font-size:13px;color:#999">138****8888</span></div><div style="font-size:13px;color:#666;margin-top:6px">成都市锦江区万象城B1层</div></div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" cursor="pointer" onclick="event.stopPropagation();showToast('编辑地址')"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    </div>
+  </div>
+  <div class="addr-c">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:15px;font-weight:600">李四</span><span style="font-size:13px;color:#999">139****6666</span></div><div style="font-size:13px;color:#666;margin-top:6px">成都市武侯区天府大道888号写字楼A座</div></div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" cursor="pointer" onclick="event.stopPropagation();showToast('编辑地址')"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    </div>
+  </div>
+</div>
+<div id="addrFormSec" style="display:none;padding:16px">
+  <div style="font-size:15px;font-weight:600;margin-bottom:12px">新增地址</div>
+  <input class="inp" placeholder="收货人姓名" style="margin-bottom:12px">
+  <input class="inp" placeholder="手机号码" type="tel" style="margin-bottom:12px">
+  <textarea class="txa" placeholder="详细地址" rows="3" style="margin-bottom:12px"></textarea>
+  <button class="btn-f" style="width:100%" onclick="showToast('保存成功');toggleAddrForm()">保存地址</button>
+</div>
+<div class="s" style="padding-bottom:100px">
+  <button class="btn-o" style="width:100%" id="addAddrBtn" onclick="toggleAddrForm()">新增地址</button>
+</div>
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="../js/common.js"></script>
+</body>
+</html>

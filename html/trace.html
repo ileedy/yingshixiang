@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>硬是香面馆</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+<div class="app" id="app">
+<div class="page" id="page-trace">
+<div class="topbar" style="background:transparent;position:absolute;width:100%;border:none;z-index:10">
+  <div class="topbar-back" style="background:rgba(255,255,255,.85);backdrop-filter:blur(10px);border-radius:50%" onclick="navigateTo('page-home')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div><div style="width:32px"></div><div style="width:32px"></div>
+</div>
+
+<!-- 顶部沉浸区 -->
+<div style="background:linear-gradient(160deg,#2a0a05 0%,#4a1a0f 50%,#6b2518 100%);padding:80px 20px 56px;color:#fff;text-align:center;position:relative;overflow:hidden">
+  <div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(247,59,32,.12),transparent 70%)"></div>
+  <div style="position:absolute;bottom:-50px;left:-30px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(255,143,0,.1),transparent 70%)"></div>
+  <div style="position:relative;z-index:1">
+    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;margin-bottom:16px">
+      <span style="width:6px;height:6px;border-radius:50%;background:#34c771;box-shadow:0 0 8px #34c771"></span>
+      今日溯源数据已更新
+    </div>
+    <div style="font-size:30px;font-weight:800;letter-spacing:2px">从田间到餐桌</div>
+    <div style="font-size:14px;margin-top:10px;opacity:.7">每一环透明可见，每一口都安心</div>
+    <div style="display:flex;justify-content:center;gap:16px;margin-top:28px">
+      <div style="text-align:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px 18px;min-width:80px">
+        <div style="font-size:26px;font-weight:800">12</div>
+        <div style="font-size:11px;opacity:.55;margin-top:4px">核心食材</div>
+      </div>
+      <div style="text-align:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px 18px;min-width:80px">
+        <div style="font-size:26px;font-weight:800">8</div>
+        <div style="font-size:11px;opacity:.55;margin-top:4px">认证供应商</div>
+      </div>
+      <div style="text-align:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px 18px;min-width:80px">
+        <div style="font-size:26px;font-weight:800">365</div>
+        <div style="font-size:11px;opacity:.55;margin-top:4px">天检测覆盖</div>
+      </div>
+    </div>
+  </div>
+  <!-- 底部波浪过渡 -->
+  <div style="position:absolute;bottom:-1px;left:0;width:100%;height:24px;background:#f5f5f5;border-radius:24px 24px 0 0"></div>
+</div>
+
+<div class="s" style="padding-top:8px">
+
+  <!-- 今日质检速报 -->
+  <div style="background:linear-gradient(135deg,#fff,#fff8f5);border-radius:20px;padding:16px;box-shadow:0 4px 20px rgba(0,0,0,.04);border:1px solid rgba(247,59,32,.08);margin-bottom:20px;display:flex;align-items:center;gap:14px">
+    <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    </div>
+    <div style="flex:1">
+      <div style="font-size:14px;font-weight:700;color:var(--color-brandwood)">今日质检全部通过</div>
+      <div style="font-size:12px;color:#888;margin-top:3px">农残检测 · 微生物检测 · 重金属检测</div>
+    </div>
+    <div style="font-size:11px;color:var(--color-coral-flame);font-weight:600;background:var(--color-sunset-fade);padding:4px 10px;border-radius:10px;white-space:nowrap">查看报告</div>
+  </div>
+
+  <!-- 食材来源 -->
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+    <div style="width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#f73b20,#ff6b35);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(247,59,32,.25)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+    <span style="font-size:17px;font-weight:800;color:var(--color-brandwood);letter-spacing:.3px">食材来源</span>
+    <span style="font-size:11px;color:#aaa;margin-left:auto">向左滑动查看更多</span>
+  </div>
+  <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch;margin:0 -4px;padding-left:4px">
+    <div style="flex:0 0 170px;background:#fff;border-radius:18px;padding:14px;box-shadow:0 4px 20px rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.04);position:relative">
+      <div style="position:absolute;top:12px;right:12px;background:linear-gradient(135deg,#ffd700,#ff8f00);color:#360802;font-size:9px;font-weight:800;padding:3px 8px;border-radius:8px;z-index:2">产地认证</div>
+      <div style="width:100%;height:100px;border-radius:14px;background:linear-gradient(135deg,#ffecd2,#fcb69f);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
+        <div style="font-size:40px;font-weight:900;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.1)">牛肉</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;height:30px;background:linear-gradient(transparent,rgba(0,0,0,.05))"></div>
+      </div>
+      <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-top:12px">精选鲜牛肉</div>
+      <div style="display:flex;align-items:center;gap:4px;margin-top:6px">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span style="font-size:11px;color:#999">内蒙古天然牧场</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:4px;margin-top:4px">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <span style="font-size:11px;color:var(--color-coral-flame);font-weight:600">每日冷链直达</span>
+      </div>
+    </div>
+    <div style="flex:0 0 170px;background:#fff;border-radius:18px;padding:14px;box-shadow:0 4px 20px rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.04);position:relative">
+      <div style="position:absolute;top:12px;right:12px;background:linear-gradient(135deg,#34c771,#2e7d32);color:#fff;font-size:9px;font-weight:800;padding:3px 8px;border-radius:8px;z-index:2">零添加</div>
+      <div style="width:100%;height:100px;border-radius:14px;background:linear-gradient(135deg,#d4fc79,#96e6a1);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
+        <div style="font-size:40px;font-weight:900;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.1)">面条</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;height:30px;background:linear-gradient(transparent,rgba(0,0,0,.05))"></div>
+      </div>
+      <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-top:12px">手工鲜面条</div>
+      <div style="display:flex;align-items:center;gap:4px;margin-top:6px">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span style="font-size:11px;color:#999">河南优质小麦粉</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:4px;margin-top:4px">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <span style="font-size:11px;color:var(--color-coral-flame);font-weight:600">零添加剂 · 现拉现煮</span>
+      </div>
+    </div>
+    <div style="flex:0 0 170px;background:#fff;border-radius:18px;padding:14px;box-shadow:0 4px 20px rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.04);position:relative">
+      <div style="position:absolute;top:12px;right:12px;background:linear-gradient(135deg,#f73b20,#ff6b35);color:#fff;font-size:9px;font-weight:800;padding:3px 8px;border-radius:8px;z-index:2">手工熬制</div>
+      <div style="width:100%;height:100px;border-radius:14px;background:linear-gradient(135deg,#ff9a9e,#fecfef);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
+        <div style="font-size:40px;font-weight:900;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.1)">辣椒</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;height:30px;background:linear-gradient(transparent,rgba(0,0,0,.05))"></div>
+      </div>
+      <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-top:12px">手工辣椒油</div>
+      <div style="display:flex;align-items:center;gap:4px;margin-top:6px">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span style="font-size:11px;color:#999">四川二荆条 · 汉源花椒</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:4px;margin-top:4px">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <span style="font-size:11px;color:var(--color-coral-flame);font-weight:600">现熬现制 · 香辣醇厚</span>
+      </div>
+    </div>
+    <div style="flex:0 0 170px;background:#fff;border-radius:18px;padding:14px;box-shadow:0 4px 20px rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.04);position:relative">
+      <div style="position:absolute;top:12px;right:12px;background:linear-gradient(135deg,#477ee9,#2196f3);color:#fff;font-size:9px;font-weight:800;padding:3px 8px;border-radius:8px;z-index:2">6小时慢熬</div>
+      <div style="width:100%;height:100px;border-radius:14px;background:linear-gradient(135deg,#a1c4fd,#c2e9fb);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
+        <div style="font-size:40px;font-weight:900;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.1)">骨汤</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;height:30px;background:linear-gradient(transparent,rgba(0,0,0,.05))"></div>
+      </div>
+      <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-top:12px">大骨浓汤</div>
+      <div style="display:flex;align-items:center;gap:4px;margin-top:6px">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span style="font-size:11px;color:#999">猪筒骨 + 鸡骨架</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:4px;margin-top:4px">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <span style="font-size:11px;color:var(--color-coral-flame);font-weight:600">慢熬6小时 · 汤清味浓</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 制作流程 -->
+  <div style="display:flex;align-items:center;gap:8px;margin:28px 0 14px">
+    <div style="width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#f73b20,#ff6b35);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(247,59,32,.25)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+    <span style="font-size:17px;font-weight:800;color:var(--color-brandwood);letter-spacing:.3px">每日制作流程</span>
+    <span style="font-size:11px;color:#aaa;margin-left:auto;background:#f5f5f5;padding:3px 10px;border-radius:10px">5道工序</span>
+  </div>
+  <div style="background:#fff;border-radius:20px;padding:20px;box-shadow:0 4px 20px rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.03)">
+    <div style="display:flex;gap:14px;align-items:flex-start">
+      <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+        <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#f73b20,#ff6b35);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(247,59,32,.2)"><span style="font-size:14px;font-weight:800;color:#fff">1</span></div>
+        <div style="width:2px;flex:1;min-height:36px;background:repeating-linear-gradient(180deg,#f73b20 0px,#f73b20 4px,transparent 4px,transparent 8px);opacity:.3"></div>
+      </div>
+      <div style="padding-top:4px;flex:1;padding-bottom:16px;border-bottom:1px dashed rgba(0,0,0,.06)">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:14px;font-weight:700;color:var(--color-brandwood)">凌晨采购</span>
+          <span style="font-size:10px;color:#fff;background:linear-gradient(135deg,#f73b20,#ff6b35);padding:2px 8px;border-radius:6px;font-weight:600">04:00</span>
+        </div>
+        <div style="font-size:12px;color:#888;margin-top:6px;line-height:1.6">厨师长亲自前往本地农贸市场和合作基地，挑选当日最新鲜的食材，严格把控品质源头</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;align-items:flex-start">
+      <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+        <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#ff8f00,#ffd700);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(255,143,0,.2)"><span style="font-size:14px;font-weight:800;color:#fff">2</span></div>
+        <div style="width:2px;flex:1;min-height:36px;background:repeating-linear-gradient(180deg,#ff8f00 0px,#ff8f00 4px,transparent 4px,transparent 8px);opacity:.3"></div>
+      </div>
+      <div style="padding-top:4px;flex:1;padding-bottom:16px;border-bottom:1px dashed rgba(0,0,0,.06)">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:14px;font-weight:700;color:var(--color-brandwood)">现熬汤底</span>
+          <span style="font-size:10px;color:#fff;background:linear-gradient(135deg,#ff8f00,#ffd700);padding:2px 8px;border-radius:6px;font-weight:600">05:00</span>
+        </div>
+        <div style="font-size:12px;color:#888;margin-top:6px;line-height:1.6">猪筒骨与鸡骨架大火煮沸后转小火慢熬6小时，期间不断撇去浮沫，汤清味浓</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;align-items:flex-start">
+      <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+        <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#4caf50,#8bc34a);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(76,175,80,.2)"><span style="font-size:14px;font-weight:800;color:#fff">3</span></div>
+        <div style="width:2px;flex:1;min-height:36px;background:repeating-linear-gradient(180deg,#4caf50 0px,#4caf50 4px,transparent 4px,transparent 8px);opacity:.3"></div>
+      </div>
+      <div style="padding-top:4px;flex:1;padding-bottom:16px;border-bottom:1px dashed rgba(0,0,0,.06)">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:14px;font-weight:700;color:var(--color-brandwood)">手工揉面</span>
+          <span style="font-size:10px;color:#fff;background:linear-gradient(135deg,#4caf50,#8bc34a);padding:2px 8px;border-radius:6px;font-weight:600">08:00</span>
+        </div>
+        <div style="font-size:12px;color:#888;margin-top:6px;line-height:1.6">河南优质小麦粉，加入鸡蛋和盐，手工揉制三光面团，醒发30分钟后现拉现煮</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;align-items:flex-start">
+      <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+        <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#f73b20,#ff6b35);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(247,59,32,.2)"><span style="font-size:14px;font-weight:800;color:#fff">4</span></div>
+        <div style="width:2px;flex:1;min-height:36px;background:repeating-linear-gradient(180deg,#f73b20 0px,#f73b20 4px,transparent 4px,transparent 8px);opacity:.3"></div>
+      </div>
+      <div style="padding-top:4px;flex:1;padding-bottom:16px;border-bottom:1px dashed rgba(0,0,0,.06)">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:14px;font-weight:700;color:var(--color-brandwood)">现炒浇头</span>
+          <span style="font-size:10px;color:#fff;background:linear-gradient(135deg,#f73b20,#ff6b35);padding:2px 8px;border-radius:6px;font-weight:600">10:00</span>
+        </div>
+        <div style="font-size:12px;color:#888;margin-top:6px;line-height:1.6">每份浇头点单后现炒现做，牛肉现切现卤，蔬菜现洗现切，拒绝任何预制</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;align-items:flex-start">
+      <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+        <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#ff8f00,#ffd700);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(255,143,0,.2)"><span style="font-size:14px;font-weight:800;color:#fff">5</span></div>
+      </div>
+      <div style="padding-top:4px;flex:1">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:14px;font-weight:700;color:var(--color-brandwood)">出锅上桌</span>
+          <span style="font-size:10px;color:#fff;background:linear-gradient(135deg,#ff8f00,#ffd700);padding:2px 8px;border-radius:6px;font-weight:600">即点即做</span>
+          <span style="font-size:10px;color:#34c771;background:#e8f5e9;padding:2px 8px;border-radius:6px;font-weight:600">今日执行中</span>
+        </div>
+        <div style="font-size:12px;color:#888;margin-top:6px;line-height:1.6">面条现煮现捞，60秒内浇头盖面，保证每一碗都是热腾腾的最佳口感</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 品质承诺 -->
+  <div style="display:flex;align-items:center;gap:8px;margin:28px 0 14px">
+    <div style="width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#f73b20,#ff6b35);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(247,59,32,.25)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+    <span style="font-size:17px;font-weight:800;color:var(--color-brandwood);letter-spacing:.3px">品质承诺</span>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+    <div style="background:#fff;border-radius:18px;padding:18px 14px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.04)">
+      <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#fff0f0,#ffe0e0);display:flex;align-items:center;justify-content:center;margin:0 auto"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f73b20" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-top:12px">源头可查</div>
+      <div style="font-size:11px;color:#999;margin-top:4px;line-height:1.5">每批食材均可追溯到产地与供应商，扫码即可查看</div>
+    </div>
+    <div style="background:#fff;border-radius:18px;padding:18px 14px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.04)">
+      <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#fff0f0,#ffe0e0);display:flex;align-items:center;justify-content:center;margin:0 auto"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f73b20" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+      <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-top:12px">拒绝预制</div>
+      <div style="font-size:11px;color:#999;margin-top:4px;line-height:1.5">所有浇头均点单后现炒现做，不用任何预制菜</div>
+    </div>
+    <div style="background:#fff;border-radius:18px;padding:18px 14px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.04)">
+      <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#fff0f0,#ffe0e0);display:flex;align-items:center;justify-content:center;margin:0 auto"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f73b20" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+      <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-top:12px">品质保证</div>
+      <div style="font-size:11px;color:#999;margin-top:4px;line-height:1.5">不满意可免费重做或全额退款，售后无忧</div>
+    </div>
+    <div style="background:#fff;border-radius:18px;padding:18px 14px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.04)">
+      <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#fff0f0,#ffe0e0);display:flex;align-items:center;justify-content:center;margin:0 auto"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f73b20" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+      <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-top:12px">新鲜当日</div>
+      <div style="font-size:11px;color:#999;margin-top:4px;line-height:1.5">当日食材当日用完，绝不过夜，每日清零</div>
+    </div>
+  </div>
+
+  <!-- 供应商认证 -->
+  <div style="display:flex;align-items:center;gap:8px;margin:28px 0 14px">
+    <div style="width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#477ee9,#2196f3);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(71,126,233,.25)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+    <span style="font-size:17px;font-weight:800;color:var(--color-brandwood);letter-spacing:.3px">供应商认证</span>
+  </div>
+  <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 4px 20px rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.03)">
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.04)">
+      <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#ffecd2,#fcb69f);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#e65100">牛</div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:700;color:var(--color-brandwood)">内蒙古科尔沁肉业</div>
+        <div style="font-size:11px;color:#999;margin-top:2px">有机认证 · ISO22000 · 冷链专线</div>
+      </div>
+      <div style="font-size:10px;color:#34c771;background:#e8f5e9;padding:3px 8px;border-radius:8px;font-weight:600">合作3年</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.04)">
+      <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#d4fc79,#96e6a1);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#2e7d32">麦</div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:700;color:var(--color-brandwood)">河南金沙河面业</div>
+        <div style="font-size:11px;color:#999;margin-top:2px">绿色食品 · 非遗传承 · 当日配送</div>
+      </div>
+      <div style="font-size:10px;color:#34c771;background:#e8f5e9;padding:3px 8px;border-radius:8px;font-weight:600">合作2年</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 0">
+      <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#ff9a9e,#fecfef);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#c62828">椒</div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:700;color:var(--color-brandwood)">四川郫都区辣椒基地</div>
+        <div style="font-size:11px;color:#999;margin-top:2px">地理标志 · 手工采摘 · 产地直发</div>
+      </div>
+      <div style="font-size:10px;color:#34c771;background:#e8f5e9;padding:3px 8px;border-radius:8px;font-weight:600">合作4年</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="../js/common.js"></script>
+</body>
+</html>
