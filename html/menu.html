@@ -11,10 +11,10 @@
 <div class="app" id="app">
 <div class="page active" id="page-menu">
 <!-- Top Bar -->
-<div style="padding:10px 16px;display:flex;align-items:center;justify-content:space-between;background:#fff;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(0,0,0,.04)">
+<div style="padding:12px 16px;display:flex;align-items:center;justify-content:space-between;background:var(--color-bg);position:sticky;top:0;z-index:100">
   <div class="topbar-back" onclick="navigateTo('page-home')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div>
-  <span style="font-size:16px;font-weight:700;letter-spacing:1px">点餐</span>
-  <div style="width:36px;height:36px;border-radius:12px;background:var(--color-sunset-fade);display:flex;align-items:center;justify-content:center;cursor:pointer" onclick="showToast('搜索')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+  <span style="font-size:17px;font-weight:700;letter-spacing:.5px;color:var(--color-brandwood)">点餐</span>
+  <div style="width:36px;height:36px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.06)" onclick="showToast('搜索')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
 </div>
 <!-- Menu Layout -->
 <div class="menu-ly" id="menuLayout">
@@ -88,15 +88,15 @@
           加料
         </div>
         <div style="display:flex;flex-direction:column;gap:8px">
-          <div class="ckb" style="padding:12px;border-radius:12px;background:var(--color-sunset-fade)" onclick="this.querySelector('.ckb-box').classList.toggle('ck');this.querySelector('svg').style.display=this.querySelector('.ckb-box').classList.contains('ck')?'block':'none'">
+          <div class="ckb" style="padding:12px;border-radius:14px;background:var(--color-sunset-fade);transition:all .2s ease" onclick="this.querySelector('.ckb-box').classList.toggle('ck');this.style.background=this.querySelector('.ckb-box').classList.contains('ck')?'rgba(247,59,32,.08)':'var(--color-sunset-fade)';this.querySelector('svg').style.display=this.querySelector('.ckb-box').classList.contains('ck')?'block':'none'">
             <div class="ckb-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></div>
             <div style="flex:1;display:flex;justify-content:space-between"><span style="font-size:14px">加蛋</span><span style="font-size:14px;color:var(--color-coral-flame);font-weight:500">+¥2</span></div>
           </div>
-          <div class="ckb" style="padding:12px;border-radius:12px;background:var(--color-sunset-fade)" onclick="this.querySelector('.ckb-box').classList.toggle('ck');this.querySelector('svg').style.display=this.querySelector('.ckb-box').classList.contains('ck')?'block':'none'">
+          <div class="ckb" style="padding:12px;border-radius:14px;background:var(--color-sunset-fade);transition:all .2s ease" onclick="this.querySelector('.ckb-box').classList.toggle('ck');this.style.background=this.querySelector('.ckb-box').classList.contains('ck')?'rgba(247,59,32,.08)':'var(--color-sunset-fade)';this.querySelector('svg').style.display=this.querySelector('.ckb-box').classList.contains('ck')?'block':'none'">
             <div class="ckb-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></div>
             <div style="flex:1;display:flex;justify-content:space-between"><span style="font-size:14px">加肉</span><span style="font-size:14px;color:var(--color-coral-flame);font-weight:500">+¥5</span></div>
           </div>
-          <div class="ckb" style="padding:12px;border-radius:12px;background:var(--color-sunset-fade)" onclick="this.querySelector('.ckb-box').classList.toggle('ck');this.querySelector('svg').style.display=this.querySelector('.ckb-box').classList.contains('ck')?'block':'none'">
+          <div class="ckb" style="padding:12px;border-radius:14px;background:var(--color-sunset-fade);transition:all .2s ease" onclick="this.querySelector('.ckb-box').classList.toggle('ck');this.style.background=this.querySelector('.ckb-box').classList.contains('ck')?'rgba(247,59,32,.08)':'var(--color-sunset-fade)';this.querySelector('svg').style.display=this.querySelector('.ckb-box').classList.contains('ck')?'block':'none'">
             <div class="ckb-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></div>
             <div style="flex:1;display:flex;justify-content:space-between"><span style="font-size:14px">加青菜</span><span style="font-size:14px;color:var(--color-coral-flame);font-weight:500">+¥3</span></div>
           </div>
@@ -174,35 +174,14 @@ function renderDishes(catIdx){
   const c=document.getElementById('menuContent');
   if(!c)return;
   const filtered=dishes.filter(d=>d.cat===catIdx);
-  const promos=[
-    {icon:'M13 2L3 14h9l-1 8 10-12h-9l1-8z',title:'限时特惠',sub:'每日10:00开抢 低至5折',bg:'linear-gradient(135deg,#fff5f0,#ffe0d3)',btn:'去抢购'},
-    {icon:'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z',title:'招牌推荐',sub:'本店招牌 好评率99%',bg:'linear-gradient(135deg,#fff5f0,#ffe0d3)',btn:'查看'},
-    {icon:'M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z',title:'满30减5',sub:'满50减10 满80减18',bg:'linear-gradient(135deg,#fff5f0,#ffe0d3)',btn:'领券'},
-    {icon:'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',title:'搭配推荐',sub:'点面加小菜 更划算',bg:'linear-gradient(135deg,#fff5f0,#ffe0d3)',btn:'去看看'},
-    {icon:'M22 12h-4l-3 9L9 3l-3 9H2',title:'清凉一夏',sub:'饮品第二杯半价',bg:'linear-gradient(135deg,#fff5f0,#ffe0d3)',btn:'选购'},
-    {icon:'M2 7v14a2 2 0 002 2h16a2 2 0 002-2V7M2 7l10-5 10 5',title:'超值套餐',sub:'套餐立省5元起',bg:'linear-gradient(135deg,#fff5f0,#ffe0d3)',btn:'选购'}
-  ];
-  const p=promos[catIdx];
-  const promoHtml=`
-    <div style="margin:12px 12px 0;padding:14px 18px;background:${p.bg};border-radius:18px;display:flex;align-items:center;gap:14px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.04)" onclick="showToast('${p.title}')">
-      <div style="flex-shrink:0;width:40px;height:40px;border-radius:12px;background:var(--color-coral-flame);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(247,59,32,.25)">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="${p.icon}"/></svg>
-      </div>
-      <div style="flex:1;min-width:0">
-        <div style="font-size:15px;font-weight:700;color:#333">${p.title}</div>
-        <div style="font-size:12px;color:#999;margin-top:3px">${p.sub}</div>
-      </div>
-      <div style="padding:6px 16px;background:#fff;color:var(--color-coral-flame);font-size:13px;font-weight:600;border-radius:20px;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.06)">${p.btn}</div>
-    </div>
-  `;
-  const dishHtml=filtered.map(d=>{
+  const dishHtml=filtered.map((d,i)=>{
     const extra=getDishExtra(d.id);
     const qty=getCartQty(d.id);
     const qtyHtml=qty>0
       ?`<div class="dc-qty"><button class="dc-qty-b" onclick="event.stopPropagation();updateDishQty(${d.id},-1)">-</button><span class="dc-qty-n">${qty}</span><button class="dc-qty-b" onclick="event.stopPropagation();updateDishQty(${d.id},1)">+</button></div>`
       :`<button class="dc-add" onclick="event.stopPropagation();openDish(${d.id})">+</button>`;
     return`
-    <div class="dc">
+    <div class="dc" style="animation:fadeSlideUp .35s ease both;animation-delay:${i*0.06}s">
       <div class="dc-img" onclick="openDish(${d.id})"><img src="${d.img}" style="width:100%;height:100%;object-fit:cover;border-radius:14px" alt="${d.name}"></div>
       <div class="dc-info">
         <div>
@@ -222,7 +201,7 @@ function renderDishes(catIdx){
     </div>
   `}).join('');
   const emptyHtml=filtered.length===0?`<div style="text-align:center;padding:60px 20px;color:#ccc"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" style="margin:0 auto 12px;display:block"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><div style="font-size:14px;margin-bottom:8px">该分类暂无商品</div><div style="font-size:12px">去看看其他分类吧～</div></div>`:'';
-  c.innerHTML=promoHtml+dishHtml+emptyHtml;
+  c.innerHTML=dishHtml+emptyHtml;
 }
 renderDishes(0);
 
