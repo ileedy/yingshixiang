@@ -70,8 +70,58 @@
   </div>
 </div>
 
+<!-- Order Status Quick Entry -->
+<div style="margin:14px 16px 0">
+  <div style="background:#fff;border-radius:20px;padding:18px 14px;box-shadow:0 4px 20px rgba(0,0,0,.04)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#f73b20,#ff6b35);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(247,59,32,.2)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <span style="font-size:16px;font-weight:700;color:var(--color-brandwood)">我的订单</span>
+      </div>
+      <span style="font-size:12px;color:var(--color-coral-flame);cursor:pointer;font-weight:600;display:flex;align-items:center;gap:2px" onclick="navigateTo('page-orders')">全部订单 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+    </div>
+    <div style="display:flex">
+      <div style="flex:1;text-align:center;cursor:pointer;padding:10px 0;border-radius:14px;transition:all .2s;position:relative" onclick="navigateTo('page-orders')" onmouseenter="this.style.background='rgba(247,59,32,.04)'" onmouseleave="this.style.background='transparent'">
+        <div style="position:relative;display:inline-block">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <span style="position:absolute;top:-4px;right:-8px;min-width:16px;height:16px;border-radius:8px;background:var(--color-coral-flame);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px">2</span>
+        </div>
+        <div style="font-size:12px;color:#666;margin-top:6px;font-weight:500">待付款</div>
+      </div>
+      <div style="flex:1;text-align:center;cursor:pointer;padding:10px 0;border-radius:14px;transition:all .2s;position:relative" onclick="navigateTo('page-orders')" onmouseenter="this.style.background='rgba(247,59,32,.04)'" onmouseleave="this.style.background='transparent'">
+        <div style="position:relative;display:inline-block">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          <span style="position:absolute;top:-4px;right:-8px;min-width:16px;height:16px;border-radius:8px;background:var(--color-coral-flame);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px">1</span>
+        </div>
+        <div style="font-size:12px;color:#666;margin-top:6px;font-weight:500">待取餐</div>
+      </div>
+      <div style="flex:1;text-align:center;cursor:pointer;padding:10px 0;border-radius:14px;transition:all .2s;position:relative" onclick="navigateTo('page-orders')" onmouseenter="this.style.background='rgba(247,59,32,.04)'" onmouseleave="this.style.background='transparent'">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.8"><path d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3zM7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3"/></svg>
+        <div style="font-size:12px;color:#666;margin-top:6px;font-weight:500">待评价</div>
+      </div>
+      <div style="flex:1;text-align:center;cursor:pointer;padding:10px 0;border-radius:14px;transition:all .2s;position:relative" onclick="showToast('退款/售后')" onmouseenter="this.style.background='rgba(247,59,32,.04)'" onmouseleave="this.style.background='transparent'">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <div style="font-size:12px;color:#666;margin-top:6px;font-weight:500">退款/售后</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Recent Order Preview -->
+<div style="margin:14px 16px 0" id="recentOrderWrap">
+  <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 4px 20px rgba(0,0,0,.04)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <span style="font-size:14px;font-weight:700;color:var(--color-brandwood)">最近订单</span>
+      <span style="font-size:12px;color:var(--color-coral-flame);cursor:pointer;font-weight:600;display:flex;align-items:center;gap:2px" onclick="navigateTo('page-orders')">查看全部 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+    </div>
+    <div id="recentOrderContent"></div>
+  </div>
+</div>
+
 <!-- Member Benefits -->
-<div class="s" style="padding:20px 16px 0">
+<div class="s" style="padding:14px 16px 0">
   <div style="background:#fff;border-radius:20px;padding:18px;box-shadow:0 4px 20px rgba(0,0,0,.04)">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
       <div style="display:flex;align-items:center;gap:8px">
@@ -190,7 +240,7 @@
         </div>
         <div style="font-size:11px;font-weight:700;color:var(--color-brandwood)">美食家</div>
       </div>
-      <div style="text-align:center;cursor:pointer;flex:1">
+      <div style="text-align:center;cursor:pointer;flex:1" onclick="showToast('更多成就 coming soon')">
         <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#f5f5f5,#eee);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;border:2px dashed #ddd">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </div>
@@ -293,5 +343,59 @@
       <div class="ni active" onclick="window.location.href='./profile.html'"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>我的</span></div>
   </div>
 <script src="../js/common.js"></script>
+<script>
+// Check-in state
+(function(){
+  const today=new Date().toDateString();
+  const checked=localStorage.getItem('checkinDate')===today;
+  const btn=document.querySelector('button[onclick*="showToast(\'每日签到+10积分\')"]');
+  if(btn && checked){
+    btn.textContent='已签到';
+    btn.style.background='rgba(255,255,255,.08)';
+    btn.style.color='rgba(255,255,255,.6)';
+    btn.style.borderColor='rgba(255,255,255,.1)';
+    btn.style.cursor='default';
+    btn.onclick=null;
+  }
+  if(btn && !checked){
+    const originalOnclick=btn.onclick;
+    btn.onclick=function(e){
+      localStorage.setItem('checkinDate',today);
+      btn.textContent='已签到';
+      btn.style.background='rgba(255,255,255,.08)';
+      btn.style.color='rgba(255,255,255,.6)';
+      btn.style.borderColor='rgba(255,255,255,.1)';
+      btn.style.cursor='default';
+      btn.onclick=null;
+      showToast('每日签到+10积分');
+    };
+  }
+})();
+
+// Render recent order preview
+(function(){
+  const wrap=document.getElementById('recentOrderContent');
+  if(!wrap || typeof orders==='undefined' || !orders.length){
+    const el=document.getElementById('recentOrderWrap');
+    if(el) el.style.display='none';
+    return;
+  }
+  const o=orders[0];
+  const st={pending:{text:'待付款',color:'var(--color-coral-flame)'},preparing:{text:'制作中',color:'var(--color-cobalt-pulse)'},ready:{text:'待取餐',color:'var(--color-cobalt-pulse)'},done:{text:'已完成',color:'#999'}};
+  const s=st[o.status]||{text:o.status,color:'#999'};
+  wrap.innerHTML=`<div style="display:flex;gap:12px;align-items:center;padding:10px;border-radius:14px;background:var(--color-sunset-fade);cursor:pointer" onclick="navigateTo('page-order-detail')">
+    <div style="width:52px;height:52px;border-radius:12px;overflow:hidden;flex-shrink:0;background:#fff"><img src="${dishImgMap[o.items[0]]||'../image/dish-signature-beef.jpg'}" style="width:100%;height:100%;object-fit:cover" alt=""></div>
+    <div style="flex:1;min-width:0">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <span style="font-size:14px;font-weight:700;color:var(--color-brandwood)">${o.items[0]}${o.count>1?' 等'+o.count+'件':''}</span>
+        <span style="font-size:12px;font-weight:600;color:${s.color}">${s.text}</span>
+      </div>
+      <div style="font-size:12px;color:#999">${o.time}</div>
+      <div style="font-size:14px;color:var(--color-coral-flame);font-weight:700;margin-top:4px">¥${o.total}</div>
+    </div>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+  </div>`;
+})();
+</script>
 </body>
 </html>
