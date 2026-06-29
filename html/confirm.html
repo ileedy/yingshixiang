@@ -391,16 +391,76 @@ function renderConfirmOrder(){
   const total=subtotal+deliveryFee+packFee-discount;
   const totalQty=cart.reduce((s,c)=>s+c.qty,0);
   updatePrice(subtotal,total,discount,deliveryFee,packFee,totalQty);
-  renderCouponProgress(subtotal);
-  renderQuickAdd();
-  renderUpsell();
+  renderMarketing(subtotal);
+}
+
+function renderMarketing(subtotal){
+  const inCartIds=new Set(cart.map(c=>c.id));
+  const hasUpsell=upsellItems.some(i=>!inCartIds.has(i.id));
+  const hasQuickAdd=quickAddItems.some(i=>!inCartIds.has(i.id));
+  const couponBox=document.getElementById('couponProgressBox');
+  const quickAddBox=document.getElementById('quickAddBox');
+  const upsellBox=document.getElementById('upsellBox');
+  if(!couponBox||!quickAddBox||!upsellBox)return;
+
+  // 优先级1: 凑单提示（金额<50时始终显示）
+  if(subtotal<50){
+    renderCouponProgress(subtotal);
+    couponBox.style.display='flex';
+  }else{
+    couponBox.style.display='none';
+  }
+
+  // 优先级2 & 3: 加价购 vs 顺手买一件（互斥，根据金额和可用性动态选择）
+  if(subtotal<30){
+    // 低客单: 顺手买一件（帮助凑单，推荐低价商品）
+    if(hasQuickAdd){
+      renderQuickAddList();
+      quickAddBox.style.display='block';
+      upsellBox.style.display='none';
+    }else if(hasUpsell){
+      renderUpsellList();
+      upsellBox.style.display='block';
+      quickAddBox.style.display='none';
+    }else{
+      quickAddBox.style.display='none';
+      upsellBox.style.display='none';
+    }
+  }else if(subtotal<50){
+    // 中客单: 加价购（优惠感知更强，转化更高）
+    if(hasUpsell){
+      renderUpsellList();
+      upsellBox.style.display='block';
+      quickAddBox.style.display='none';
+    }else if(hasQuickAdd){
+      renderQuickAddList();
+      quickAddBox.style.display='block';
+      upsellBox.style.display='none';
+    }else{
+      quickAddBox.style.display='none';
+      upsellBox.style.display='none';
+    }
+  }else{
+    // 高客单(>=50): 加价购优先，其次顺手买一件
+    if(hasUpsell){
+      renderUpsellList();
+      upsellBox.style.display='block';
+      quickAddBox.style.display='none';
+    }else if(hasQuickAdd){
+      renderQuickAddList();
+      quickAddBox.style.display='block';
+      upsellBox.style.display='none';
+    }else{
+      quickAddBox.style.display='none';
+      upsellBox.style.display='none';
+    }
+  }
 }
 
 function renderCouponProgress(subtotal){
-  const box=document.getElementById('couponProgressBox');
   const text=document.getElementById('couponProgressText');
   const bar=document.getElementById('couponProgressBar');
-  if(!box||!text||!bar)return;
+  if(!text||!bar)return;
   const coupons=[{threshold:30,amount:5,name:'满30减5元券'},{threshold:50,amount:10,name:'满50减10元券'}];
   let best=null;
   for(const c of coupons){
@@ -409,24 +469,21 @@ function renderCouponProgress(subtotal){
   }
   if(!best||best.canUse){
     if(subtotal>=30){
-      box.style.display='flex';
       text.textContent='已满足满30减5元券条件，下单立省¥5';
       bar.style.width='100%';
-    }else{box.style.display='none';}
+    }
   }else{
-    box.style.display='flex';
     text.textContent='再买 ¥'+best.gap.toFixed(0)+' 即可使用'+best.name+'，立省¥'+best.amount;
     bar.style.width=best.progress+'%';
   }
 }
 
-function renderQuickAdd(){
+function renderQuickAddList(){
   const el=document.getElementById('quickAddList');
   if(!el)return;
   const inCartIds=new Set(cart.map(c=>c.id));
   const items=quickAddItems.filter(i=>!inCartIds.has(i.id));
-  if(items.length===0){document.getElementById('quickAddBox').style.display='none';return;}
-  document.getElementById('quickAddBox').style.display='block';
+  if(items.length===0)return;
   el.innerHTML=items.map((item,i)=>`
     <div style="flex-shrink:0;width:120px;background:var(--color-sunset-fade);border-radius:16px;padding:12px;text-align:center;position:relative">
       <span style="position:absolute;top:8px;left:8px;font-size:10px;color:#fff;background:var(--color-coral-flame);padding:2px 6px;border-radius:8px;font-weight:600">${item.tag}</span>
@@ -446,13 +503,12 @@ function quickAddToCart(id){
   saveCart();updateCart();renderConfirmOrder();showToast(item.name+' 已加入购物车');
 }
 
-function renderUpsell(){
+function renderUpsellList(){
   const el=document.getElementById('upsellList');
   if(!el)return;
   const inCartIds=new Set(cart.map(c=>c.id));
   const items=upsellItems.filter(i=>!inCartIds.has(i.id));
-  if(items.length===0){document.getElementById('upsellBox').style.display='none';return;}
-  document.getElementById('upsellBox').style.display='block';
+  if(items.length===0)return;
   el.innerHTML=items.map((item,i)=>`
     <div style="flex-shrink:0;width:140px;background:#fff;border-radius:16px;padding:12px;text-align:center;position:relative;border:1px solid rgba(52,199,113,.15)">
       <span style="position:absolute;top:8px;left:8px;font-size:10px;color:var(--color-mint-action);background:rgba(52,199,113,.1);padding:2px 6px;border-radius:8px;font-weight:600">${item.tag}</span>
