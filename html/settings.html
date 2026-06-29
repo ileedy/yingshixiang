@@ -26,5 +26,22 @@
 </div>
 <div id="toast" class="toast"></div>
 <script src="../js/common.js"></script>
+<script>
+
+function toggleChildMeal(){
+  const box=document.getElementById('childMealBox');
+  if(!box)return;
+  box.classList.toggle('ck');
+  const svg=box.querySelector('svg');
+  if(svg)svg.style.display=box.classList.contains('ck')?'block':'none';
+}
+function toggleAddrForm(){
+  const f=document.getElementById('addrFormSec');
+  if(!f)return;
+  f.style.display=f.style.display==='none'?'block':'none';
+}
+function selectGender(el){selectRadio(el);}
+function selectPickupTime(el){selectRadio(el);}
+</script>
 </body>
 </html>

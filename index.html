@@ -476,5 +476,82 @@
       <div class="ni" onclick="window.location.href='html/profile.html'"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>我的</span></div>
   </div>
 <script src="./js/common.js"></script>
+<script>
+
+// Banner
+let bannerIdx=0,bannerTimer=null;
+function goToBanner(idx){
+  bannerIdx=idx;
+  const track=document.getElementById('bannerTrack');
+  if(track)track.style.transform='translateX(-'+idx*100+'%)';
+  document.querySelectorAll('.b-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+}
+function autoSlide(){
+  bannerTimer=setInterval(()=>{bannerIdx=(bannerIdx+1)%3;goToBanner(bannerIdx)},3000);
+}
+autoSlide();
+
+// Hero Banner Carousel
+const heroSlides=[
+  {tag:'营业中 · 新鲜现做',title:'一碗好面<br/>温暖一座城',sub:'拒绝预制 · 匠心手作 · 食材可溯源'},
+  {tag:'手工拉面 · 现场制作',title:'匠心手作<br/>每碗都是艺术',sub:'传承百年的拉面工艺 · 当日面粉当日用'},
+  {tag:'夜市限定 · 晚间特惠',title:'烟火人间<br/>深夜食堂',sub:'红灯笼下的一碗热面 · 温暖每个夜晚'}
+];
+let heroIdx=0,heroTimer=null;
+function goToHeroSlide(idx){
+  heroIdx=idx;
+  const track=document.getElementById('heroTrack');
+  if(track)track.style.transform='translateX(-'+idx*100+'%)';
+  document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+  const t=document.getElementById('heroTitle'),s=document.getElementById('heroSub'),g=document.getElementById('heroTag');
+  if(!t||!s||!g)return;
+  t.style.opacity='0';s.style.opacity='0';g.style.opacity='0';
+  setTimeout(()=>{
+    g.textContent=heroSlides[idx].tag;
+    t.innerHTML=heroSlides[idx].title;
+    s.textContent=heroSlides[idx].sub;
+    t.style.opacity='1';s.style.opacity='1';g.style.opacity='1';
+  },300);
+}
+function autoHeroSlide(){
+  heroTimer=setInterval(()=>{heroIdx=(heroIdx+1)%3;goToHeroSlide(heroIdx)},4500);
+}
+autoHeroSlide();
+
+// Kitchen camera live time
+function updateCamTime(){
+  const el=document.getElementById('camTime');
+  if(!el)return;
+  const now=new Date();
+  el.textContent=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0')+':'+String(now.getSeconds()).padStart(2,'0');
+}
+setInterval(updateCamTime,1000);
+updateCamTime();
+
+// Coupon popup
+setTimeout(()=>{
+  const homePage=document.getElementById('page-home');
+  if(homePage && homePage.classList.contains('active')){
+    const cp=document.getElementById('couponPopup');
+    if(cp)cp.classList.add('active');
+  }
+},800);
+function closeCouponPopup(){document.getElementById('couponPopup').classList.remove('active');}
+function claimCoupon(btn){
+  const txt=document.getElementById('cpBtnText');
+  if(txt.textContent.includes('已领取')){closeCouponPopup();return;}
+  txt.textContent='领取中...';
+  btn.style.background='linear-gradient(135deg,#ccc,#ddd)';
+  btn.style.boxShadow='none';
+  btn.style.cursor='wait';
+  setTimeout(()=>{
+    btn.style.background='linear-gradient(135deg,#22c55e,#16a34a)';
+    btn.style.boxShadow='0 6px 20px rgba(34,197,94,.35)';
+    txt.textContent='领取成功';
+    btn.style.cursor='pointer';
+    setTimeout(()=>{closeCouponPopup();},600);
+  },800);
+}
+</script>
 </body>
 </html>

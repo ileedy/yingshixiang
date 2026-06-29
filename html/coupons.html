@@ -24,5 +24,26 @@
 </div>
 <div id="toast" class="toast"></div>
 <script src="../js/common.js"></script>
+<script>
+
+function switchCouponTab(el,type){
+  document.querySelectorAll('#page-coupons .tab-p').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  const list=document.getElementById('couponList');
+  if(!list)return;
+  if(type==='expired'){
+    list.innerHTML=\`
+      <div class="cpn-c"><div class="cpn-l" style="background:#bbb"><div class="cpn-amt">¥3</div><div class="cpn-cond">满15可用</div></div><div class="cpn-r"><div class="cpn-nm" style="color:#999">满15减3</div><div class="cpn-exp">2026-05-31已过期</div></div><div class="cpn-act"><span class="cpn-btn used">已过期</span></div></div>
+      <div class="cpn-c"><div class="cpn-l" style="background:#bbb"><div class="cpn-amt">¥10</div><div class="cpn-cond">满40可用</div></div><div class="cpn-r"><div class="cpn-nm" style="color:#999">满40减10</div><div class="cpn-exp">2026-06-01已过期</div></div><div class="cpn-act"><span class="cpn-btn used">已过期</span></div></div>
+    \`;
+  } else {
+    list.innerHTML=\`
+      <div class="cpn-c"><div class="cpn-l" style="background:var(--gradient-coral-flame)"><div class="cpn-amt">¥5</div><div class="cpn-cond">满20可用</div></div><div class="cpn-r"><div class="cpn-nm">满20减5优惠券</div><div class="cpn-ds">全场通用</div><div class="cpn-exp">2026-07-15到期</div></div><div class="cpn-act"><span class="cpn-btn">去使用</span></div></div>
+      <div class="cpn-c"><div class="cpn-l" style="background:linear-gradient(135deg,#ff9800,#f57c00)"><div class="cpn-amt">¥8</div><div class="cpn-cond">满30可用</div></div><div class="cpn-r"><div class="cpn-nm">满30减8优惠券</div><div class="cpn-ds">全场通用</div><div class="cpn-exp">2026-07-31到期</div></div><div class="cpn-act"><span class="cpn-btn">去使用</span></div></div>
+      <div class="cpn-c"><div class="cpn-l" style="background:linear-gradient(135deg,#9c27b0,#7b1fa2)"><div class="cpn-amt">¥15</div><div class="cpn-cond">满50可用</div></div><div class="cpn-r"><div class="cpn-nm">满50减15优惠券</div><div class="cpn-ds">限招牌面食</div><div class="cpn-exp">2026-08-15到期</div></div><div class="cpn-act"><span class="cpn-btn">去使用</span></div></div>
+    \`;
+  }
+}
+</script>
 </body>
 </html>

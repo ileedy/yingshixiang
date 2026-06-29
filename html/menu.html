@@ -63,5 +63,123 @@
       <div class="ni" onclick="window.location.href='./profile.html'"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>我的</span></div>
   </div>
 <script src="../js/common.js"></script>
+<script>
+
+let currentDish=null,modalQty=1;
+
+function switchCategory(idx){
+  document.querySelectorAll('.menu-sb-i').forEach((s,i)=>s.classList.toggle('active',i===idx));
+  renderDishes(idx);
+}
+
+function renderDishes(catIdx){
+  const c=document.getElementById('menuContent');
+  if(!c)return;
+  const filtered=dishes.filter(d=>d.cat===catIdx);
+  const promos=[
+    {icon:'M13 2L3 14h9l-1 8 10-12h-9l1-8z',title:'限时特惠',sub:'每日10:00开抢 低至5折',bg:'linear-gradient(135deg,#fff5f0,#ffe0d3)',btn:'去抢购'},
+    {icon:'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z',title:'招牌推荐',sub:'本店招牌 好评率99%',bg:'linear-gradient(135deg,#fff5f0,#ffe0d3)',btn:'查看'},
+    {icon:'M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z',title:'满30减5',sub:'满50减10 满80减18',bg:'linear-gradient(135deg,#fff5f0,#ffe0d3)',btn:'领券'},
+    {icon:'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',title:'搭配推荐',sub:'点面加小菜 更划算',bg:'linear-gradient(135deg,#fff5f0,#ffe0d3)',btn:'去看看'},
+    {icon:'M22 12h-4l-3 9L9 3l-3 9H2',title:'清凉一夏',sub:'饮品第二杯半价',bg:'linear-gradient(135deg,#fff5f0,#ffe0d3)',btn:'选购'},
+    {icon:'M2 7v14a2 2 0 002 2h16a2 2 0 002-2V7M2 7l10-5 10 5',title:'超值套餐',sub:'套餐立省5元起',bg:'linear-gradient(135deg,#fff5f0,#ffe0d3)',btn:'选购'}
+  ];
+  const p=promos[catIdx];
+  const promoHtml=\`
+    <div style="margin:12px 12px 0;padding:14px 18px;background:\${p.bg};border-radius:18px;display:flex;align-items:center;gap:14px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.04)" onclick="showToast('\${p.title}')">
+      <div style="flex-shrink:0;width:40px;height:40px;border-radius:12px;background:var(--color-coral-flame);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(247,59,32,.25)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="\${p.icon}"/></svg>
+      </div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:15px;font-weight:700;color:#333">\${p.title}</div>
+        <div style="font-size:12px;color:#999;margin-top:3px">\${p.sub}</div>
+      </div>
+      <div style="padding:6px 16px;background:#fff;color:var(--color-coral-flame);font-size:13px;font-weight:600;border-radius:20px;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.06)">\${p.btn}</div>
+    </div>
+  \`;
+  c.innerHTML=promoHtml+filtered.map(d=>{
+    const extra=getDishExtra(d.id);
+    const qty=getCartQty(d.id);
+    const tagHtml=extra.tag?\`<div class="dc-tag" style="background:\${extra.tagColor}">\${extra.tag}</div>\`:'';
+    const qtyHtml=qty>0
+      ?\`<div class="dc-qty"><button class="dc-qty-b" onclick="event.stopPropagation();updateDishQty(\${d.id},-1)">-</button><span class="dc-qty-n">\${qty}</span><button class="dc-qty-b" onclick="event.stopPropagation();updateDishQty(\${d.id},1)">+</button></div>\`
+      :\`<button class="dc-add" onclick="event.stopPropagation();updateDishQty(\${d.id},1)">+</button>\`;
+    return\`
+    <div class="dc">
+      <div class="dc-img" onclick="openDish(\${d.id})">\${tagHtml}<img src="\${d.img}" style="width:100%;height:100%;object-fit:cover;border-radius:14px" alt="\${d.name}"></div>
+      <div class="dc-info">
+        <div>
+          <div class="dc-nm">\${d.name}</div>
+          <div class="dc-ds">\${d.desc}</div>
+          <div class="dc-meta">
+            <span class="dc-star">&#9733; \${extra.rating}</span>
+            <span>·</span>
+            <span>月售 \${extra.sales}</span>
+          </div>
+        </div>
+        <div class="dc-bt">
+          <span class="dc-pr">¥\${d.price}<small>起</small></span>
+          \${qtyHtml}
+        </div>
+      </div>
+    </div>
+  \`}).join('');
+}
+renderDishes(0);
+
+function openDish(id){
+  currentDish=dishes.find(d=>d.id===id);if(!currentDish)return;
+  modalQty=1;
+  document.getElementById('modalQty').textContent='1';
+  document.getElementById('dishModalHeroImg').src=currentDish.img;
+  document.getElementById('dishModalHeroImg').alt=currentDish.name;
+  document.getElementById('dishModalStickyImg').src=currentDish.img;
+  document.getElementById('dishModalStickyImg').alt=currentDish.name;
+  document.getElementById('dishModalName').textContent=currentDish.name;
+  document.getElementById('dishModalDesc').textContent=currentDish.desc;
+  document.getElementById('dishModalPrice').textContent='¥'+currentDish.price;
+  document.getElementById('dishModalStickyName').textContent=currentDish.name;
+  document.getElementById('dishModalStickyPrice').textContent='¥'+currentDish.price;
+  const scrollEl=document.getElementById('dishModalScroll');
+  scrollEl.scrollTop=0;
+  const bs=document.getElementById('dishModal');
+  bs.classList.remove('scrolled');
+  bs.classList.add('active');
+  document.getElementById('dishOv').classList.add('active');
+  scrollEl.onscroll=function(){
+    if(scrollEl.scrollTop>180)bs.classList.add('scrolled');
+    else bs.classList.remove('scrolled');
+  };
+}
+function closeDishModal(){
+  const bs=document.getElementById('dishModal');
+  bs.classList.remove('active','scrolled');
+  document.getElementById('dishOv').classList.remove('active');
+  document.getElementById('dishModalScroll').onscroll=null;
+}
+function changeModalQty(d){
+  modalQty=Math.max(1,modalQty+d);
+  document.getElementById('modalQty').textContent=modalQty;
+}
+function addToCartFromModal(){
+  if(!currentDish)return;
+  const existing=cart.find(c=>c.id===currentDish.id);
+  if(existing)existing.qty+=modalQty;else cart.push({id:currentDish.id,name:currentDish.name,price:currentDish.price,qty:modalQty,img:currentDish.img});
+  closeDishModal();
+  updateCart();showToast('已加入购物车');
+}
+
+function startOrder(type){
+  currentOrderType=type;
+  navigateTo('page-menu');
+  const tabs=document.querySelectorAll('#orderTypeTabs .tab-p');
+  tabs.forEach(t=>{t.classList.toggle('active',t.dataset.type===type);});
+  switchOrderTypeUI(type);
+}
+
+function goToCategory(idx){
+  navigateTo('page-menu');
+}
+</script>
 </body>
 </html>

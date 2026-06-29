@@ -282,5 +282,12 @@
 </div>
 <div id="toast" class="toast"></div>
 <script src="../js/common.js"></script>
+<script>
+
+function selectRecharge(el,amt){
+  document.querySelectorAll('.rch-c').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+}
+</script>
 </body>
 </html>

@@ -177,5 +177,97 @@
 </div>
 <div id="toast" class="toast"></div>
 <script src="../js/common.js"></script>
+<script>
+
+let selectedTable='A1',tablewareCount=1;
+
+function switchOrderType(el,type){
+  document.querySelectorAll('#orderTypeTabs .tab-p').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  currentOrderType=type;
+  switchOrderTypeUI(type);
+  updateConfirmPage();
+}
+
+function switchOrderTypeUI(type){
+  const pts=document.getElementById('pickupTimeSection');
+  const das=document.getElementById('deliveryAddrSection');
+  const tns=document.getElementById('tableNumberSection');
+  if(pts)pts.style.display=type==='pickup'?'block':'none';
+  if(das)das.style.display=type==='delivery'?'block':'none';
+  if(tns)tns.style.display=type==='dine-in'?'block':'none';
+}
+
+function selectTable(el){
+  document.querySelectorAll('#tableNumberGrid .table-num').forEach(t=>{
+    t.classList.remove('active');
+    t.style.background='#f5f5f5';t.style.color='#666';t.style.borderColor='transparent';t.style.fontWeight='500';
+  });
+  el.classList.add('active');
+  el.style.background='var(--color-sunset-fade)';el.style.color='var(--color-coral-flame)';el.style.borderColor='rgba(247,59,32,.2)';el.style.fontWeight='600';
+  selectedTable=el.textContent;
+}
+
+function changeTableware(d){
+  tablewareCount=Math.max(0,Math.min(10,tablewareCount+d));
+  const el=document.getElementById('tablewareCount');
+  if(el)el.textContent=tablewareCount;
+}
+
+function goToCheckout(){
+  if(cart.length===0){showToast('请先选择商品');return;}
+  closeCart();
+  renderConfirmOrder();
+  navigateTo('page-confirm');
+}
+
+function renderConfirmOrder(){
+  const el=document.getElementById('confirmOrderItems');
+  if(!el)return;
+  if(cart.length===0){
+    el.innerHTML='<div style="text-align:center;padding:32px 0;color:#ccc"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" style="margin:0 auto 8px;display:block"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><div style="font-size:13px">请先选择商品</div></div>';
+  }else{
+    el.innerHTML=cart.map(c=>{
+      const img=dishImgMap[c.name]||'../image/dish-signature-beef.jpg';
+      const specs=c.specs&&c.specs.length?'<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px">'+c.specs.map(s=>'<span style="font-size:11px;color:var(--color-coral-flame);background:rgba(247,59,32,.06);padding:1px 6px;border-radius:4px">'+s+'</span>').join('')+'</div>':'';
+      return '<div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.04)"><img src="'+img+'" style="width:56px;height:56px;border-radius:10px;object-fit:cover;flex-shrink:0" alt="'+c.name+'"><div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div style="font-size:14px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+c.name+'</div><span style="font-size:14px;font-weight:600;flex-shrink:0;margin-left:8px">¥'+(c.price*c.qty)+'</span></div>'+specs+'<div style="font-size:12px;color:#999;margin-top:4px">¥'+c.price+' x '+c.qty+'</div></div></div>';
+    }).join('');
+  }
+  const subtotal=cart.reduce((s,c)=>s+c.price*c.qty,0);
+  const totalQty=cart.reduce((s,c)=>s+c.qty,0);
+  let disc=0;
+  if(selectedCoupon)disc=selectedCoupon.amount;
+  const packFee=cart.length>0?2:0;
+  const deliveryFee=currentOrderType==='delivery'?5:0;
+  const total=Math.max(0,subtotal+packFee+deliveryFee-disc);
+  const cs=document.getElementById('confirmSubtotal');if(cs)cs.textContent='¥'+subtotal;
+  const cpr=document.getElementById('confirmPackRow');if(cpr)cpr.style.display=cart.length>0?'flex':'none';
+  const cdr=document.getElementById('confirmDelRow');if(cdr)cdr.style.display=currentOrderType==='delivery'?'flex':'none';
+  const cd=document.getElementById('confirmDiscRow');if(cd)cd.style.display=disc>0?'flex':'none';
+  const cdi=document.getElementById('confirmDisc');if(cdi)cdi.textContent='-¥'+disc;
+  const ct=document.getElementById('confirmTotal');if(ct)ct.textContent='¥'+total.toFixed(0);
+  const ctb=document.getElementById('confirmTotalBottom');if(ctb)ctb.textContent='¥'+total.toFixed(0);
+  const cic=document.getElementById('confirmItemCount');if(cic)cic.textContent='共'+totalQty+'件';
+  const sob=document.getElementById('submitOrderBtn');if(sob)sob.textContent='提交订单 ¥'+total.toFixed(0);
+}
+
+function updateConfirmPage(){renderConfirmOrder();}
+
+function submitOrder(){
+  if(cart.length===0){showToast('购物车为空');return;}
+  navigateTo('page-success');
+  const sp=document.getElementById('successPickup');if(sp)sp.style.display=(currentOrderType==='dine-in'||currentOrderType==='pickup')?'block':'none';
+  const sd=document.getElementById('successDelivery');if(sd)sd.style.display=currentOrderType==='delivery'?'block':'none';
+  cart=[];updateCart();selectedCoupon=null;
+}
+
+function openCouponSheet(){document.getElementById('couponSheet').classList.add('active');}
+function closeCouponSheet(){document.getElementById('couponSheet').classList.remove('active');}
+function selectCoupon(amount,name){
+  selectedCoupon={amount,name};
+  const sct=document.getElementById('selCouponText');if(sct)sct.textContent='-'+name;
+  closeCouponSheet();renderConfirmOrder();
+}
+</script>
 </body>
 </html>

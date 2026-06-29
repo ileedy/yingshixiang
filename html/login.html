@@ -38,5 +38,15 @@
 </div>
 <div id="toast" class="toast"></div>
 <script src="../js/common.js"></script>
+<script>
+
+function toggleAgreement(){
+  const box=document.getElementById('agrBox');
+  if(!box)return;
+  box.classList.toggle('ck');
+  const svg=box.querySelector('svg');
+  if(svg)svg.style.display=box.classList.contains('ck')?'block':'none';
+}
+</script>
 </body>
 </html>
