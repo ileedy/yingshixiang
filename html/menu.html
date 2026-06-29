@@ -54,6 +54,105 @@
 </div>
 </div>
 
+<!-- Dish Detail Modal -->
+<div class="dish-ov" id="dishOv" onclick="closeDishModal()"></div>
+<div class="dish-bs" id="dishModal">
+  <div class="dish-bs-scroll" id="dishModalScroll">
+    <div class="dish-bs-hero" id="dishModalHero">
+      <img src="" alt="" id="dishModalHeroImg">
+      <div class="dish-bs-close" onclick="closeDishModal()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </div>
+    </div>
+    <div class="dish-bs-handle"></div>
+    <div class="dish-bs-info">
+      <div id="dishModalName" class="dish-bs-name"></div>
+      <div id="dishModalDesc" class="dish-bs-desc"></div>
+      <div id="dishModalPrice" class="dish-bs-price"></div>
+    </div>
+    <div style="padding:0 20px 20px">
+      <div style="height:1px;background:rgba(0,0,0,.06);margin:16px 0"></div>
+      <div>
+        <div style="font-size:14px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:6px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          口味选择
+        </div>
+        <div style="display:flex;gap:8px">
+          <div class="radio-i sel" style="flex:1;justify-content:center;margin-bottom:0;padding:10px" onclick="selectRadio(this)"><div class="radio-c"><div class="radio-ci"></div></div><span style="font-size:14px">微辣</span></div>
+          <div class="radio-i" style="flex:1;justify-content:center;margin-bottom:0;padding:10px" onclick="selectRadio(this)"><div class="radio-c"><div class="radio-ci"></div></div><span style="font-size:14px">中辣</span></div>
+          <div class="radio-i" style="flex:1;justify-content:center;margin-bottom:0;padding:10px" onclick="selectRadio(this)"><div class="radio-c"><div class="radio-ci"></div></div><span style="font-size:14px">特辣</span></div>
+        </div>
+      </div>
+      <div style="margin-top:20px">
+        <div style="font-size:14px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:6px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 15a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          加料
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="ckb" style="padding:12px;border-radius:12px;background:var(--color-sunset-fade)" onclick="this.querySelector('.ckb-box').classList.toggle('ck');this.querySelector('svg').style.display=this.querySelector('.ckb-box').classList.contains('ck')?'block':'none'">
+            <div class="ckb-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div style="flex:1;display:flex;justify-content:space-between"><span style="font-size:14px">加蛋</span><span style="font-size:14px;color:var(--color-coral-flame);font-weight:500">+¥2</span></div>
+          </div>
+          <div class="ckb" style="padding:12px;border-radius:12px;background:var(--color-sunset-fade)" onclick="this.querySelector('.ckb-box').classList.toggle('ck');this.querySelector('svg').style.display=this.querySelector('.ckb-box').classList.contains('ck')?'block':'none'">
+            <div class="ckb-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div style="flex:1;display:flex;justify-content:space-between"><span style="font-size:14px">加肉</span><span style="font-size:14px;color:var(--color-coral-flame);font-weight:500">+¥5</span></div>
+          </div>
+          <div class="ckb" style="padding:12px;border-radius:12px;background:var(--color-sunset-fade)" onclick="this.querySelector('.ckb-box').classList.toggle('ck');this.querySelector('svg').style.display=this.querySelector('.ckb-box').classList.contains('ck')?'block':'none'">
+            <div class="ckb-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" style="display:none"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div style="flex:1;display:flex;justify-content:space-between"><span style="font-size:14px">加青菜</span><span style="font-size:14px;color:var(--color-coral-flame);font-weight:500">+¥3</span></div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:20px"><textarea class="txa" placeholder="备注（选填）如：不要香菜、少辣..." rows="2" style="border-radius:12px"></textarea></div>
+      <div style="height:80px"></div>
+    </div>
+  </div>
+  <div class="dish-bs-sticky" id="dishModalSticky">
+    <img src="" alt="" class="dish-bs-sticky-img" id="dishModalStickyImg">
+    <div class="dish-bs-sticky-info">
+      <div class="dish-bs-sticky-name" id="dishModalStickyName"></div>
+      <div class="dish-bs-sticky-price" id="dishModalStickyPrice"></div>
+    </div>
+  </div>
+  <div id="dishModalFooter" style="padding:12px 20px 20px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(0,0,0,.06)">
+    <div style="display:flex;align-items:center;gap:10px">
+      <span style="font-size:14px;color:#666">数量</span>
+      <div class="qty-s">
+        <button class="qty-b" onclick="changeModalQty(-1)">-</button>
+        <span class="qty-n" id="modalQty">1</span>
+        <button class="qty-b" onclick="changeModalQty(1)">+</button>
+      </div>
+    </div>
+    <button class="btn-f" style="padding:12px 28px;border-radius:24px;font-size:15px" onclick="addToCartFromModal()">加入购物车</button>
+  </div>
+</div>
+
+<!-- Cart Sidebar -->
+<div class="cart-ov" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-sb" id="cartSidebar">
+  <div style="display:flex;justify-content:center;padding:10px 0 6px;cursor:pointer" onclick="closeCart()">
+    <div style="width:40px;height:4px;border-radius:2px;background:#ddd"></div>
+  </div>
+  <div style="padding:4px 16px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(0,0,0,.04)">
+    <div style="display:flex;align-items:center;gap:8px">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+      <span style="font-size:17px;font-weight:700">购物车</span>
+    </div>
+    <span style="font-size:13px;color:var(--color-coral-flame);cursor:pointer;font-weight:500" onclick="clearCart()">清空</span>
+  </div>
+  <div id="cartItemsList" style="flex:1;overflow-y:auto;padding:8px 16px"></div>
+  <div style="padding:12px 16px 20px;border-top:1px solid rgba(0,0,0,.04);background:var(--color-sunset-fade);border-radius:0 0 24px 24px">
+    <textarea class="txa" placeholder="整单备注（选填）" rows="2" style="border-radius:12px;font-size:13px;margin-bottom:12px;background:#fff"></textarea>
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <span style="font-size:13px;color:#999">合计</span>
+        <span style="font-size:22px;font-weight:700;color:var(--color-coral-flame);margin-left:4px" id="cartSidebarTotal">¥0</span>
+      </div>
+      <button class="btn-f" style="padding:12px 28px;border-radius:24px;font-size:15px" onclick="goToCheckout()">去结算</button>
+    </div>
+  </div>
+</div>
+
 </div>
 <div id="toast" class="toast"></div>
   <div class="bnav" id="bottomNav">
@@ -101,7 +200,7 @@ function renderDishes(catIdx){
     const tagHtml=extra.tag?`<div class="dc-tag" style="background:${extra.tagColor}">${extra.tag}</div>`:'';
     const qtyHtml=qty>0
       ?`<div class="dc-qty"><button class="dc-qty-b" onclick="event.stopPropagation();updateDishQty(${d.id},-1)">-</button><span class="dc-qty-n">${qty}</span><button class="dc-qty-b" onclick="event.stopPropagation();updateDishQty(${d.id},1)">+</button></div>`
-      :`<button class="dc-add" onclick="event.stopPropagation();updateDishQty(${d.id},1)">+</button>`;
+      :`<button class="dc-add" onclick="event.stopPropagation();openDish(${d.id})">+</button>`;
     return`
     <div class="dc">
       <div class="dc-img" onclick="openDish(${d.id})">${tagHtml}<img src="${d.img}" style="width:100%;height:100%;object-fit:cover;border-radius:14px" alt="${d.name}"></div>
@@ -116,7 +215,7 @@ function renderDishes(catIdx){
           </div>
         </div>
         <div class="dc-bt">
-          <span class="dc-pr">¥${d.price}<small>起</small></span>
+          <span class="dc-pr">¥${d.price}</span>
           ${qtyHtml}
         </div>
       </div>
