@@ -230,3 +230,12 @@ function goToCheckout(){
 
 // Auto scroll to top on page load
 window.addEventListener('DOMContentLoaded',()=>{window.scrollTo(0,0);});
+
+function startOrder(type){
+  currentOrderType=type||'dine-in';
+  saveCart();
+  navigateTo('page-menu');
+}
+function goToCategory(cat){
+  window.location.href='html/menu.html?cat='+cat;
+}

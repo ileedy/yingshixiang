@@ -7,63 +7,96 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/common.css?v=2">
 <style>
-.type-i{padding:10px 20px;border-radius:20px;font-size:14px;font-weight:600;cursor:pointer;transition:all .25s cubic-bezier(.4,0,.2,1);white-space:nowrap;border:2px solid transparent}
-.type-i.active{color:#fff;background:var(--color-coral-flame);border-color:var(--color-coral-flame);box-shadow:0 4px 12px rgba(247,59,32,.25);transform:scale(1.05)}
-.type-i:not(.active){color:#999;background:#fff;border-color:#eee}
-.type-i:not(.active):active{transform:scale(.95)}
-.confirm-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid rgba(0,0,0,.04);align-items:center}
+/* ========================================
+   确认订单页 - 统一视觉样式
+   ======================================== */
+
+/* --- 统一基础卡片 --- */
+.card{background:#fff;border-radius:16px;padding:14px 16px;box-shadow:0 1px 8px rgba(0,0,0,.04)}
+
+/* --- 统一 Section 间距 --- */
+.sec{padding:10px 16px 0}
+
+/* --- 统一区块标题：左边色块 + 文字 --- */
+.sec-title{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--color-brandwood);margin-bottom:10px}
+.sec-title::before{content:'';width:3px;height:14px;border-radius:2px;background:var(--color-coral-flame);flex-shrink:0}
+
+/* --- 用餐方式 Pill 按钮 --- */
+.type-i{padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;transition:all .25s cubic-bezier(.4,0,.2,1);white-space:nowrap;border:1.5px solid transparent;display:inline-flex;align-items:center}
+.type-i.active{color:#fff;background:var(--color-coral-flame);border-color:var(--color-coral-flame);box-shadow:0 2px 8px rgba(247,59,32,.2)}
+.type-i:not(.active){color:#888;background:#fff;border-color:#eee}
+.type-i:not(.active):active{transform:scale(.96);background:#f8f8f8}
+
+/* --- 订单商品行 --- */
+.confirm-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid rgba(0,0,0,.04);align-items:center}
 .confirm-item:last-child{border-bottom:none;padding-bottom:0}
-.confirm-item img{width:64px;height:64px;border-radius:12px;object-fit:cover;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.confirm-item img{width:56px;height:56px;border-radius:10px;object-fit:cover;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,.06)}
 .confirm-item-info{flex:1;min-width:0}
-.confirm-item-name{font-size:15px;font-weight:600;color:var(--color-brandwood);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.confirm-item-qty{font-size:12px;color:#bbb;margin-top:4px}
-.confirm-item-price{font-size:16px;color:var(--color-coral-flame);font-weight:700;white-space:nowrap}
+.confirm-item-name{font-size:14px;font-weight:600;color:var(--color-brandwood);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.confirm-item-qty{font-size:12px;color:#bbb;margin-top:3px}
+.confirm-item-price{font-size:15px;color:var(--color-coral-flame);font-weight:700;white-space:nowrap}
 
-.price-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0}
-.price-row .label{font-size:14px;color:#999}
-.price-row .value{font-size:15px;font-weight:600;color:var(--color-brandwood)}
+/* --- 费用行 --- */
+.price-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0}
+.price-row .label{font-size:13px;color:#999}
+.price-row .value{font-size:14px;font-weight:600;color:var(--color-brandwood)}
 .price-row .value.discount{color:var(--color-mint-action)}
-.price-row .value.total{font-size:22px;font-weight:800;color:var(--color-coral-flame)}
+.price-row .value.total{font-size:20px;font-weight:800;color:var(--color-coral-flame)}
 
-.submit-btn{background:linear-gradient(135deg,#f73b20,#ff6b35);color:#fff;border:none;border-radius:28px;padding:16px 0;font-size:17px;font-weight:700;cursor:pointer;width:100%;letter-spacing:1px;box-shadow:0 8px 24px rgba(247,59,32,.3);transition:all .2s ease}
-.submit-btn:active{transform:scale(.97);box-shadow:0 4px 12px rgba(247,59,32,.2)}
+/* --- 提交按钮 --- */
+.submit-btn{background:linear-gradient(135deg,#f73b20,#ff6b35);color:#fff;border:none;border-radius:14px;padding:14px 0;font-size:16px;font-weight:700;cursor:pointer;width:100%;letter-spacing:1px;box-shadow:0 6px 20px rgba(247,59,32,.25);transition:all .2s ease}
+.submit-btn:active{transform:scale(.97);box-shadow:0 3px 10px rgba(247,59,32,.15)}
 .submit-btn:disabled{background:#ddd;box-shadow:none;cursor:not-allowed;transform:none}
 
-.info-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(0,0,0,.04);cursor:pointer;transition:background .2s}
+/* --- 信息行 --- */
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(0,0,0,.04);cursor:pointer;transition:background .2s}
 .info-row:last-child{border-bottom:none}
 .info-row:active{background:rgba(0,0,0,.02)}
-.info-row-left{display:flex;align-items:center;gap:10px}
-.info-row-icon{width:32px;height:32px;border-radius:10px;background:var(--color-sunset-fade);display:flex;align-items:center;justify-content:center}
+.info-row-left{display:flex;align-items:center;gap:8px}
+.info-row-icon{width:28px;height:28px;border-radius:8px;background:var(--color-sunset-fade);display:flex;align-items:center;justify-content:center}
 .info-row-label{font-size:14px;font-weight:600;color:var(--color-brandwood)}
 .info-row-value{font-size:14px;color:#999;display:flex;align-items:center;gap:4px}
 .info-row-value.active{color:var(--color-coral-flame);font-weight:600}
 
-@keyframes fadeSlideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.anim-up{animation:fadeSlideUp .4s ease both}
-.anim-up-1{animation-delay:.08s}
-.anim-up-2{animation-delay:.16s}
-.anim-up-3{animation-delay:.24s}
-.anim-up-4{animation-delay:.32s}
+/* --- 动画 --- */
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.anim-up{animation:fadeSlideUp .35s ease both}
+.anim-up-1{animation-delay:.06s}
+.anim-up-2{animation-delay:.12s}
+.anim-up-3{animation-delay:.18s}
+.anim-up-4{animation-delay:.24s}
 
 @keyframes popIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
 .pop-in{animation:popIn .25s cubic-bezier(.34,1.56,.64,1) both}
 
-@keyframes pricePop{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
+@keyframes pricePop{0%{transform:scale(1)}50%{transform:scale(1.12)}100%{transform:scale(1)}}
 .price-pop{animation:pricePop .3s ease both}
 
-.mk-card{flex-shrink:0;width:118px;background:#fff;border-radius:16px;padding:12px;text-align:center;position:relative;border:1.5px solid transparent;transition:all .2s ease}
-.mk-card:hover{border-color:rgba(247,59,32,.15);transform:translateY(-2px)}
-.mk-card-tag{position:absolute;top:8px;left:8px;font-size:10px;color:#fff;background:var(--color-coral-flame);padding:2px 7px;border-radius:8px;font-weight:600;z-index:1}
-.mk-card-img{width:56px;height:56px;border-radius:12px;object-fit:cover;margin:0 auto 8px;display:block}
-.mk-card-name{font-size:13px;font-weight:600;color:var(--color-brandwood);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mk-card-price{font-size:14px;color:var(--color-coral-flame);font-weight:700;margin:4px 0}
-.mk-card-btn{padding:6px 0;border-radius:14px;font-size:12px;width:100%;border:none;font-weight:600;cursor:pointer;transition:all .15s ease}
+/* --- 顺手买一件卡片 --- */
+.mk-card{flex-shrink:0;width:110px;background:#fff;border-radius:12px;padding:10px;text-align:center;position:relative;border:1px solid rgba(0,0,0,.05);transition:all .2s ease}
+.mk-card:hover{border-color:rgba(247,59,32,.12);transform:translateY(-1px)}
+.mk-card-tag{position:absolute;top:6px;left:6px;font-size:9px;color:#fff;background:var(--color-coral-flame);padding:1px 6px;border-radius:6px;font-weight:600;z-index:1}
+.mk-card-img{width:48px;height:48px;border-radius:10px;object-fit:cover;margin:0 auto 6px;display:block}
+.mk-card-name{font-size:12px;font-weight:600;color:var(--color-brandwood);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mk-card-price{font-size:13px;color:var(--color-coral-flame);font-weight:700;margin:3px 0}
+.mk-card-btn{padding:5px 0;border-radius:10px;font-size:11px;width:100%;border:none;font-weight:600;cursor:pointer;transition:all .15s ease}
 
-.upsell-card{flex-shrink:0;width:132px;background:#fff;border-radius:16px;padding:12px;text-align:center;position:relative;border:1.5px solid rgba(52,199,113,.12);transition:all .2s ease}
-.upsell-card:hover{border-color:rgba(52,199,113,.3);transform:translateY(-2px)}
-.upsell-tag{position:absolute;top:8px;left:8px;font-size:10px;color:var(--color-mint-action);background:rgba(52,199,113,.1);padding:2px 7px;border-radius:8px;font-weight:600;z-index:1}
-.upsell-btn{padding:6px 0;border-radius:14px;font-size:12px;width:100%;border:none;background:var(--color-mint-action);color:#fff;font-weight:600;cursor:pointer;transition:all .15s ease}
+/* --- 加价购卡片（统一白色风格） --- */
+.upsell-card{flex-shrink:0;width:110px;background:#fff;border-radius:12px;padding:10px;text-align:center;position:relative;border:1px solid rgba(0,0,0,.05);transition:all .2s ease}
+.upsell-card:hover{border-color:rgba(52,199,113,.15);transform:translateY(-1px)}
+.upsell-tag{position:absolute;top:6px;left:6px;font-size:9px;color:var(--color-mint-action);background:rgba(52,199,113,.08);padding:1px 6px;border-radius:6px;font-weight:600;z-index:1}
+.upsell-btn{padding:5px 0;border-radius:10px;font-size:11px;width:100%;border:none;background:var(--color-mint-action);color:#fff;font-weight:600;cursor:pointer;transition:all .15s ease}
 .upsell-btn:active{transform:scale(.95)}
+
+/* --- 凑单提示（简洁内嵌） --- */
+.coupon-hint{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--color-sunset-fade);border-radius:12px}
+.coupon-hint-icon{width:32px;height:32px;border-radius:50%;background:var(--color-coral-flame);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.coupon-hint-text{flex:1;min-width:0;font-size:12px;font-weight:600;color:var(--color-brandwood)}
+.coupon-hint-bar{width:100%;height:5px;background:rgba(0,0,0,.05);border-radius:3px;margin-top:6px;overflow:hidden}
+.coupon-hint-bar-fill{height:100%;background:linear-gradient(90deg,#f73b20,#ff6b35);border-radius:3px;transition:width .4s ease}
+
+/* --- 隐藏区块副标题（自提/外卖不单独显示标题） --- */
+.sub-section-title{display:none}
 </style>
 </head>
 <body>
@@ -78,10 +111,10 @@
 </div>
 
 <!-- Order Type -->
-<div class="anim-up" style="padding:12px 16px 0">
-  <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
-    <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-bottom:12px">用餐方式</div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap">
+<div class="anim-up sec">
+  <div class="card">
+    <div class="sec-title">用餐方式</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
       <div class="type-i active" data-type="dine-in" onclick="selectOrderType('dine-in',this)">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:-3px;margin-right:4px"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>堂食
       </div>
@@ -96,16 +129,16 @@
 </div>
 
 <!-- Pickup Info (Pickup only) -->
-<div class="anim-up anim-up-1" id="pickupSection" style="padding:12px 16px 0;display:none">
-  <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
-    <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-bottom:12px">取餐信息</div>
-    <div style="display:flex;gap:10px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px">
+<div class="anim-up anim-up-1 sec" id="pickupSection" style="display:none">
+  <div class="card" style="padding-top:10px">
+    <div class="sub-section-title" style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-bottom:12px">取餐信息</div>
+    <div style="display:flex;gap:8px;margin-bottom:10px;overflow-x:auto;padding-bottom:2px">
       <div class="type-i active" style="padding:8px 16px;font-size:13px" onclick="this.parentElement.querySelectorAll('.type-i').forEach(t=>t.classList.remove('active'));this.classList.add('active')">10分钟后</div>
       <div class="type-i" style="padding:8px 16px;font-size:13px" onclick="this.parentElement.querySelectorAll('.type-i').forEach(t=>t.classList.remove('active'));this.classList.add('active')">20分钟后</div>
       <div class="type-i" style="padding:8px 16px;font-size:13px" onclick="this.parentElement.querySelectorAll('.type-i').forEach(t=>t.classList.remove('active'));this.classList.add('active')">30分钟后</div>
       <div class="type-i" style="padding:8px 16px;font-size:13px" onclick="this.parentElement.querySelectorAll('.type-i').forEach(t=>t.classList.remove('active'));this.classList.add('active')">到店后制作</div>
     </div>
-    <div style="padding:12px;background:var(--color-sunset-fade);border-radius:14px;display:flex;align-items:center;gap:10px">
+    <div style="padding:10px 12px;background:var(--color-sunset-fade);border-radius:12px;display:flex;align-items:center;gap:8px">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
       <div>
         <div style="font-size:13px;font-weight:600;color:var(--color-brandwood)">硬是香面馆 · 万象城店</div>
@@ -116,9 +149,9 @@
 </div>
 
 <!-- Delivery Info (Delivery only) -->
-<div class="anim-up anim-up-1" id="deliverySection" style="padding:12px 16px 0;display:none">
-  <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
-    <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-bottom:12px">配送信息</div>
+<div class="anim-up anim-up-1 sec" id="deliverySection" style="display:none">
+  <div class="card" style="padding-top:10px">
+    <div class="sub-section-title" style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-bottom:12px">配送信息</div>
     <div class="info-row" onclick="showToast('选择收货地址')">
       <div class="info-row-left">
         <div class="info-row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
@@ -129,12 +162,12 @@
       </div>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </div>
-    <div style="display:flex;gap:10px;margin-top:8px;overflow-x:auto;padding-bottom:4px">
+    <div style="display:flex;gap:8px;margin-top:6px;overflow-x:auto;padding-bottom:2px">
       <div class="type-i active" style="padding:8px 16px;font-size:13px" onclick="this.parentElement.querySelectorAll('.type-i').forEach(t=>t.classList.remove('active'));this.classList.add('active')">尽快送达</div>
       <div class="type-i" style="padding:8px 16px;font-size:13px" onclick="this.parentElement.querySelectorAll('.type-i').forEach(t=>t.classList.remove('active'));this.classList.add('active')">12:00</div>
       <div class="type-i" style="padding:8px 16px;font-size:13px" onclick="this.parentElement.querySelectorAll('.type-i').forEach(t=>t.classList.remove('active'));this.classList.add('active')">12:30</div>
     </div>
-    <div style="margin-top:10px;padding:10px 12px;background:rgba(251,45,84,.06);border-radius:12px;display:flex;align-items:center;gap:8px">
+    <div style="margin-top:8px;padding:8px 12px;background:rgba(251,45,84,.05);border-radius:10px;display:flex;align-items:center;gap:6px">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-magenta-spark)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
       <span style="font-size:12px;color:var(--color-magenta-spark);font-weight:500">预计送达时间：30-40分钟</span>
     </div>
@@ -142,10 +175,10 @@
 </div>
 
 <!-- Order Detail -->
-<div class="anim-up anim-up-2" style="padding:12px 16px 0">
-  <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-      <div style="font-size:14px;font-weight:700;color:var(--color-brandwood)">订单明细</div>
+<div class="anim-up anim-up-2 sec">
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px">
+      <div class="sec-title" style="margin-bottom:0">订单明细</div>
       <div style="font-size:12px;color:#bbb" id="confirmItemCount">共0件</div>
     </div>
     <div id="confirmOrderList"></div>
@@ -153,51 +186,51 @@
 </div>
 
 <!-- Coupon Progress -->
-<div class="anim-up anim-up-2" id="couponProgressBox" style="padding:12px 16px 0;display:none">
-  <div style="background:linear-gradient(135deg,#fff5f0,#fff);border-radius:20px;padding:14px 16px;box-shadow:0 2px 12px rgba(0,0,0,.04);border:1px solid rgba(247,59,32,.08);display:flex;align-items:center;gap:12px">
-    <div style="width:36px;height:36px;border-radius:50%;background:var(--color-coral-flame);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg></div>
-    <div style="flex:1;min-width:0">
-      <div style="font-size:13px;font-weight:600;color:var(--color-brandwood)" id="couponProgressText">再买 ¥4 即可使用满30减5元券</div>
-      <div style="width:100%;height:6px;background:rgba(0,0,0,.06);border-radius:3px;margin-top:8px;overflow:hidden">
-        <div id="couponProgressBar" style="height:100%;background:linear-gradient(90deg,#f73b20,#ff6b35);border-radius:3px;transition:width .4s ease;width:0%"></div>
+<div class="anim-up anim-up-2 sec" id="couponProgressBox" style="display:none">
+  <div class="card" style="padding:12px 14px">
+    <div class="coupon-hint">
+      <div class="coupon-hint-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg></div>
+      <div style="flex:1;min-width:0">
+        <div class="coupon-hint-text" id="couponProgressText">再买 ¥4 即可使用满30减5元券</div>
+        <div class="coupon-hint-bar">
+          <div id="couponProgressBar" class="coupon-hint-bar-fill" style="width:0%"></div>
+        </div>
       </div>
+      <button class="btn-f" style="padding:6px 14px;border-radius:14px;font-size:12px;white-space:nowrap;flex-shrink:0" onclick="navigateTo('page-menu')">去凑单</button>
     </div>
-    <button class="btn-f" style="padding:8px 16px;border-radius:16px;font-size:13px;white-space:nowrap;flex-shrink:0" onclick="navigateTo('page-menu')">去凑单</button>
   </div>
 </div>
 
 <!-- Quick Add -->
-<div class="anim-up anim-up-2" id="quickAddBox" style="padding:12px 16px 0">
-  <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
-    <div style="display:flex;align-items:center;gap:6px;margin-bottom:12px">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10"/><line x1="12" y1="2" x2="12" y2="22"/></svg>
-      <div style="font-size:14px;font-weight:700;color:var(--color-brandwood)">顺手买一件</div>
-      <span style="font-size:11px;color:#fff;background:var(--color-coral-flame);padding:2px 8px;border-radius:10px;font-weight:600">省更多</span>
+<div class="anim-up anim-up-2 sec" id="quickAddBox">
+  <div class="card">
+    <div class="sec-title">
+      顺手买一件
+      <span style="font-size:10px;color:#fff;background:var(--color-coral-flame);padding:1px 7px;border-radius:8px;font-weight:600;margin-left:-4px">省更多</span>
     </div>
-    <div id="quickAddList" style="display:flex;gap:10px;overflow-x:auto;padding-bottom:4px">
+    <div id="quickAddList" style="display:flex;gap:8px;overflow-x:auto;padding-bottom:2px">
       <!-- dynamic -->
     </div>
   </div>
 </div>
 
 <!-- Upsell -->
-<div class="anim-up anim-up-3" id="upsellBox" style="padding:12px 16px 0">
-  <div style="background:linear-gradient(135deg,rgba(52,199,113,.06),rgba(52,199,113,.02));border-radius:20px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04);border:1px solid rgba(52,199,113,.12)">
-    <div style="display:flex;align-items:center;gap:6px;margin-bottom:12px">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-mint-action)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      <div style="font-size:14px;font-weight:700;color:var(--color-brandwood)">限时加价购</div>
-      <span style="font-size:11px;color:var(--color-mint-action);background:rgba(52,199,113,.1);padding:2px 8px;border-radius:10px;font-weight:600">半价</span>
+<div class="anim-up anim-up-3 sec" id="upsellBox">
+  <div class="card">
+    <div class="sec-title">
+      限时加价购
+      <span style="font-size:10px;color:var(--color-mint-action);background:rgba(52,199,113,.08);padding:1px 7px;border-radius:8px;font-weight:600;margin-left:-4px">半价</span>
     </div>
-    <div id="upsellList" style="display:flex;gap:10px;overflow-x:auto;padding-bottom:4px">
+    <div id="upsellList" style="display:flex;gap:8px;overflow-x:auto;padding-bottom:2px">
       <!-- dynamic -->
     </div>
   </div>
 </div>
 
 <!-- Price Detail -->
-<div class="anim-up anim-up-3" style="padding:12px 16px 0">
-  <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
-    <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-bottom:8px">费用明细</div>
+<div class="anim-up anim-up-3 sec">
+  <div class="card">
+    <div class="sec-title">费用明细</div>
     <div class="price-row">
       <span class="label">商品小计</span>
       <span class="value" id="confirmSubtotal">¥0</span>
@@ -214,8 +247,8 @@
       <span class="label">优惠</span>
       <span class="value discount" id="confirmDiscount">-¥0</span>
     </div>
-    <div style="height:1px;background:rgba(0,0,0,.06);margin:8px 0"></div>
-    <div class="price-row" style="padding:6px 0">
+    <div style="height:1px;background:rgba(0,0,0,.05);margin:4px 0"></div>
+    <div class="price-row" style="padding:4px 0">
       <span class="label" style="font-size:14px;color:var(--color-brandwood);font-weight:600">合计</span>
       <span class="value total" id="confirmTotal">¥0</span>
     </div>
@@ -223,8 +256,8 @@
 </div>
 
 <!-- Coupon -->
-<div class="anim-up anim-up-3" style="padding:12px 16px 0">
-  <div style="background:#fff;border-radius:20px;padding:0 16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
+<div class="anim-up anim-up-3 sec">
+  <div class="card" style="padding-top:0;padding-bottom:0">
     <div class="info-row" onclick="openCouponSheet()">
       <div class="info-row-left">
         <div class="info-row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div>
@@ -236,8 +269,8 @@
 </div>
 
 <!-- Cutlery -->
-<div class="anim-up anim-up-3" style="padding:12px 16px 0">
-  <div style="background:#fff;border-radius:20px;padding:0 16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
+<div class="anim-up anim-up-3 sec">
+  <div class="card" style="padding-top:0;padding-bottom:0">
     <div class="info-row">
       <div class="info-row-left">
         <div class="info-row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2"/><path d="M7 2v20"/><path d="M21 2v10c0 1.1-.9 2-2 2h-4a2 2 0 01-2-2V2"/><path d="M15 2v20"/></svg></div>
@@ -253,20 +286,17 @@
 </div>
 
 <!-- Note -->
-<div class="anim-up anim-up-4" style="padding:12px 16px 0">
-  <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-      <div style="font-size:14px;font-weight:700;color:var(--color-brandwood)">备注</div>
-    </div>
+<div class="anim-up anim-up-4 sec">
+  <div class="card">
+    <div class="sec-title">备注</div>
     <textarea placeholder="如：不要香菜、少油少盐、多加辣..." rows="2" style="width:100%;border-radius:14px;background:var(--color-sunset-fade);border:1.5px solid transparent;padding:12px;font-size:14px;color:var(--color-brandwood);resize:none;outline:none;transition:all .2s ease;font-family:inherit" onfocus="this.style.borderColor='rgba(247,59,32,.2)';this.style.background='#fff'" onblur="this.style.borderColor='transparent';this.style.background='var(--color-sunset-fade)'"></textarea>
   </div>
 </div>
 
 <!-- Payment -->
-<div class="anim-up anim-up-4" style="padding:12px 16px 0">
-  <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04)">
-    <div style="font-size:14px;font-weight:700;color:var(--color-brandwood);margin-bottom:12px">支付方式</div>
+<div class="anim-up anim-up-4 sec">
+  <div class="card">
+    <div class="sec-title">支付方式</div>
     <div style="display:flex;flex-direction:column;gap:10px">
       <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:4px 0">
         <div class="radio-i sel" style="margin-bottom:0" onclick="selectRadio(this)"><div class="radio-c"><div class="radio-ci"></div></div></div>
@@ -283,14 +313,14 @@
 </div>
 
 <!-- Child Meal -->
-<div class="anim-up anim-up-4" style="padding:12px 16px 0">
-  <div style="background:linear-gradient(135deg,#fff5f0,#fff);border-radius:20px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04);border:1px solid rgba(247,59,32,.08)">
+<div class="anim-up anim-up-4 sec">
+  <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center">
       <div style="display:flex;align-items:center;gap:10px">
-        <div style="width:36px;height:36px;border-radius:10px;background:var(--color-coral-flame);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--color-coral-flame);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
         <div>
-          <div style="font-size:14px;font-weight:700;color:var(--color-brandwood)">儿童免费餐</div>
-          <div style="font-size:12px;color:#bbb">已绑定5岁以下儿童，勾选免费领取</div>
+          <div style="font-size:13px;font-weight:700;color:var(--color-brandwood)">儿童免费餐</div>
+          <div style="font-size:11px;color:#bbb;margin-top:1px">已绑定5岁以下儿童，勾选免费领取</div>
         </div>
       </div>
       <div class="ckb" style="padding:6px" onclick="this.querySelector('.ckb-box').classList.toggle('ck');this.querySelector('svg').style.display=this.querySelector('.ckb-box').classList.contains('ck')?'block':'none';showToast(this.querySelector('.ckb-box').classList.contains('ck')?'已添加儿童免费餐':'已取消儿童免费餐')">
@@ -300,7 +330,7 @@
   </div>
 </div>
 
-<div style="height:140px"></div>
+<div style="height:130px"></div>
 
 </div>
 
@@ -333,8 +363,8 @@
 </div>
 
 <!-- Bottom Submit -->
-<div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:150;background:#fff;padding:12px 16px 20px;box-shadow:0 -4px 20px rgba(0,0,0,.06)">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+<div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:150;background:#fff;padding:10px 16px 18px;box-shadow:0 -2px 16px rgba(0,0,0,.05)">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
     <div>
       <span style="font-size:12px;color:#999">合计</span>
       <span style="font-size:24px;font-weight:800;color:var(--color-coral-flame);margin-left:4px" id="bottomTotal">¥0</span>
