@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="app" id="app">
-<div class="page" id="page-orders">
+<div class="page active" id="page-orders">
 <div class="topbar"><div style="width:32px"></div><span class="topbar-t">我的订单</span><div style="width:32px"></div></div>
 <div class="ord-tabs" id="orderTabs">
   <div class="ord-tab active" data-st="all" onclick="switchOrderTab(this)">全部</div>
@@ -61,28 +61,28 @@ function renderOrders(filter){
     <div class="oc" onclick="navigateTo('page-order-detail')" style="cursor:pointer;padding:0;border-radius:16px;overflow:hidden;margin:0 16px 16px">
       <div style="padding:14px 16px 10px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(0,0,0,.03)">
         <div style="display:flex;align-items:center;gap:8px">
-          <div style="display:flex;align-items:center;gap:3px;font-size:11px;font-weight:600;padding:3px 8px;border-radius:20px;background:\${tp.bg};color:\${tp.color}">\${tp.icon}<span>\${tp.text}</span></div>
-          <span style="font-size:13px;color:#999">\${o.time}</span>
+          <div style="display:flex;align-items:center;gap:3px;font-size:11px;font-weight:600;padding:3px 8px;border-radius:20px;background:${tp.bg};color:${tp.color}">${tp.icon}<span>${tp.text}</span></div>
+          <span style="font-size:13px;color:#999">${o.time}</span>
         </div>
-        <span style="font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;background:\${st.bg};color:\${st.color}">\${st.text}</span>
+        <span style="font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;background:${st.bg};color:${st.color}">${st.text}</span>
       </div>
       <div style="padding:14px 16px;display:flex;gap:12px;align-items:center">
-        <div style="width:64px;height:64px;border-radius:12px;overflow:hidden;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.08)"><img src="\${imgSrc}" style="width:100%;height:100%;object-fit:cover" alt="菜品"></div>
+        <div style="width:64px;height:64px;border-radius:12px;overflow:hidden;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.08)"><img src="${imgSrc}" style="width:100%;height:100%;object-fit:cover" alt="菜品"></div>
         <div style="flex:1;min-width:0">
-          <div style="font-size:14px;font-weight:600;color:var(--color-brandwood);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">\${o.items.join('、')}</div>
-          <div style="font-size:12px;color:#bbb;margin-top:4px">共\${o.count}件商品</div>
-          \${o.code?'<div style="font-size:13px;color:var(--color-coral-flame);font-weight:600;margin-top:6px;display:flex;align-items:center;gap:4px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>取餐码 '+o.code+'</div>':''}
-          \${o.addr?'<div style="font-size:12px;color:#999;margin-top:6px;display:flex;align-items:center;gap:4px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>'+o.addr+'</div>':''}
+          <div style="font-size:14px;font-weight:600;color:var(--color-brandwood);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${o.items.join('、')}</div>
+          <div style="font-size:12px;color:#bbb;margin-top:4px">共${o.count}件商品</div>
+          ${o.code?'<div style="font-size:13px;color:var(--color-coral-flame);font-weight:600;margin-top:6px;display:flex;align-items:center;gap:4px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral-flame)" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>取餐码 '+o.code+'</div>':''}
+          ${o.addr?'<div style="font-size:12px;color:#999;margin-top:6px;display:flex;align-items:center;gap:4px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>'+o.addr+'</div>':''}
         </div>
       </div>
       <div style="padding:10px 16px 14px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(0,0,0,.03)">
-        <div><span style="font-size:12px;color:#999">实付</span> <span style="font-size:18px;font-weight:700;color:var(--color-coral-flame)">¥\${o.total}</span></div>
+        <div><span style="font-size:12px;color:#999">实付</span> <span style="font-size:18px;font-weight:700;color:var(--color-coral-flame)">¥${o.total}</span></div>
         <div style="display:flex;gap:8px">
-          \${o.status==='pending'?\`<button class="btn-o btn-s" style="border-radius:10px;padding:6px 14px;font-size:13px" onclick="event.stopPropagation();showToast('去支付')">去支付</button><button class="btn-o btn-s" style="border-color:#eee;color:#bbb;border-radius:10px;padding:6px 14px;font-size:13px" onclick="event.stopPropagation();showToast('取消订单')">取消</button>\`:''}
-          \${o.status==='preparing'?\`<button class="btn-o btn-s" style="border-radius:10px;padding:6px 14px;font-size:13px" onclick="event.stopPropagation();showToast('已催单')">催单</button>\`:''}
-          \${o.status==='ready'&&o.type==='delivery'?\`<button class="btn-o btn-s" style="border-radius:10px;padding:6px 14px;font-size:13px" onclick="event.stopPropagation();showToast('查看配送进度')">查看配送</button>\`:''}
-          \${o.status==='ready'&&o.type!=='delivery'?\`<button class="btn-o btn-s" style="border-radius:10px;padding:6px 14px;font-size:13px" onclick="event.stopPropagation();showToast('已取餐')">确认取餐</button>\`:''}
-          \${o.status==='done'?\`<button class="btn-o btn-s" style="border-radius:10px;padding:6px 14px;font-size:13px" onclick="event.stopPropagation();showToast('评价')">评价</button><button class="btn-f btn-s" style="border-radius:10px;padding:6px 14px;font-size:13px" onclick="event.stopPropagation();reorder()">再来一单</button>\`:''}
+          ${o.status==='pending'?`<button class="btn-o btn-s" style="border-radius:10px;padding:6px 14px;font-size:13px" onclick="event.stopPropagation();showToast('去支付')">去支付</button><button class="btn-o btn-s" style="border-color:#eee;color:#bbb;border-radius:10px;padding:6px 14px;font-size:13px" onclick="event.stopPropagation();showToast('取消订单')">取消</button>`:''}
+          ${o.status==='preparing'?`<button class="btn-o btn-s" style="border-radius:10px;padding:6px 14px;font-size:13px" onclick="event.stopPropagation();showToast('已催单')">催单</button>`:''}
+          ${o.status==='ready'&&o.type==='delivery'?`<button class="btn-o btn-s" style="border-radius:10px;padding:6px 14px;font-size:13px" onclick="event.stopPropagation();showToast('查看配送进度')">查看配送</button>`:''}
+          ${o.status==='ready'&&o.type!=='delivery'?`<button class="btn-o btn-s" style="border-radius:10px;padding:6px 14px;font-size:13px" onclick="event.stopPropagation();showToast('已取餐')">确认取餐</button>`:''}
+          ${o.status==='done'?`<button class="btn-o btn-s" style="border-radius:10px;padding:6px 14px;font-size:13px" onclick="event.stopPropagation();showToast('评价')">评价</button><button class="btn-f btn-s" style="border-radius:10px;padding:6px 14px;font-size:13px" onclick="event.stopPropagation();reorder()">再来一单</button>`:''}
         </div>
       </div>
     </div>
